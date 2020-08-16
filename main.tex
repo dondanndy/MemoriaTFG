@@ -1,4 +1,4 @@
-\documentclass[11pt,usenames,dvipsnames,a4paper,twoside]{article}
+\documentclass[12pt,dvipsnames,a4paper,twoside]{article}
 \usepackage[T1]{fontenc}
 % \usepackage{helvet}
 % \renewcommand{\familydefault}{\sfdefault}
@@ -12,30 +12,68 @@
 \usepackage{makeidx}
 \usepackage{graphicx}
 \usepackage[table,xcdraw]{xcolor}
-\usepackage{wrapfig}
+% \usepackage{wrapfig}
 \usepackage{lmodern}
 \usepackage{tikz}
 \usepackage{subcaption}
-\usetikzlibrary{arrows,shapes,positioning,calc,babel}
+% \usetikzlibrary{arrows,shapes,positioning,calc,babel,pgfplots.groupplots,pgfplots.statistics}
+\usetikzlibrary{arrows,shapes,positioning,calc,babel,pgfplots.groupplots}
 \usepackage{pgfkeys} % LATEX
 \usepackage{pgffor}
 \usepackage{adjustbox}
-\usepackage{fancybox}
+% \usepackage{fancybox}
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
 \usepackage{bm}
 \usepackage{pdfpages}
 \usepackage{siunitx}
-\usepackage{multicol}
-\usepackage{afterpage}
+% \usepackage{multicol}
+% \usepackage{afterpage}
 \usepackage{float}
-\usepackage{xfrac}
+% \usepackage{xfrac}
+\usepackage{titlesec}
 \usepackage{hyperref}
 \usepackage[italicdiff]{physics}
-\usepackage[bottom=2.5cm, top = 2.5cm, right=2.5cm, left=2.5cm, bindingoffset=1cm]{geometry}
+\usepackage[bottom=2.5cm, top = 2.5cm, right=2.5cm, left=2.5cm, bindingoffset=0.5cm]{geometry}
 
 % \setlength{\parindent}{3em}
 % \setlength{\parskip}{1em}
+
+% SUBSUBSUBSECTION -------------------------------------------------------------------------------------------
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+% SUBSUBSUBSECTION -------------------------------------------------------------------------------------------
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 \begin{document}
 
@@ -79,12 +117,25 @@ Fdo. Carlos Javier García Orellana
 \newpage
 \section{Resumen}
 
+\input{tex/resumen.tex}
+
 %------------------------------------------------------------------------------
 %                             Abstract
 %------------------------------------------------------------------------------
 
-\newpage
+% \newpage
 \section{Abstract}
+
+\input{tex/abstract.tex}
+
+%------------------------------------------------------------------------------
+%                             Objetivos
+%------------------------------------------------------------------------------
+
+\newpage
+\section{Objetivos}
+
+\input{tex/objetivos.tex}
 
 %------------------------------------------------------------------------------
 %                             Introduccion
@@ -93,12 +144,24 @@ Fdo. Carlos Javier García Orellana
 \newpage
 \section{Introducción}
 
+\input{tex/introduccion.tex}
+
+%------------------------------------------------------------------------------
+%                             Antecedentes
+%------------------------------------------------------------------------------
+
+\newpage
+\section{Antecedentes}
+
+\input{tex/antecedentes.tex}
 %------------------------------------------------------------------------------
 %                             Metodologia
 %------------------------------------------------------------------------------
 
 \newpage
 \section{Metodología}
+
+\input{tex/metodologia.tex}
 
 %------------------------------------------------------------------------------
 %                             Resultados
@@ -114,4 +177,16 @@ Fdo. Carlos Javier García Orellana
 \newpage
 \section{Conclusiones}
 
+%------------------------------------------------------------------------------
+%                             Bibliografía
+%------------------------------------------------------------------------------
+
+\newpage
+\section{Bibliografía}
+
+\begingroup
+    \renewcommand{\section}[2]{}%
+    \bibliography{refs} 
+    \bibliographystyle{ieeetr}
+\endgroup
 \end{document}

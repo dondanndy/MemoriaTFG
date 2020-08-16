@@ -1,0 +1,7 @@
+\begin{tikzpicture}
+\begin{axis}[width = \textwidth, height = 0.9\textwidth,ymin=0,xlabel={Posicion (cm)}]
+    \addplot [hist={bins=10,data=y}, fill=black!50]
+    table {data/ejemplo_sensores.txt};
+    % table [x index=0, y index=1, z index=3] {data/ejemplo_sensores.txt};
+\end{axis}
+\end{tikzpicture}
