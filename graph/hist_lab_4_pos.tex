@@ -1,0 +1,9 @@
+\begin{tikzpicture}
+    \begin{axis}[small,ymin=0,xlabel={Dif [cm]},]
+    \addplot [
+    hist={bins=30,data=y},
+    fill=black!50,]
+    table[y index=2] {data/4sens_lab_full.txt};
+    % table[y index=2] {data/4sens_lab.txt};
+\end{axis}
+\end{tikzpicture}

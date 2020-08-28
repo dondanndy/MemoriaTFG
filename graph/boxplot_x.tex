@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+    \begin{axis}[
+        ylabel = {Diferencia posición (cm)},
+        x = 0.35\textwidth,
+        boxplot/draw direction=y,
+        ymajorgrids,
+        xtick={1,2},
+        xticklabels={4 bal., 6 bal.},
+        ]
+        \addplot+ [boxplot] table[y index=0] {data/4sens_lab.txt};
+        \addplot+ [boxplot] table[y index=0] {data/6sens_lab.txt};
+        % \addplot+ [boxplot] table[y index=0] {data/4sens_lab_full.txt};
+        % \addplot+ [boxplot] table[y index=0] {data/6sens_lab_full.txt};
+    \end{axis}
+\end{tikzpicture}

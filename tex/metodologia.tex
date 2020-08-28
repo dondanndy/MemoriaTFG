@@ -1,12 +1,12 @@
-Para la toma de datos se consideraron dos escenarios: el primero fue uno de los laboratorios situados en los Institutos Universitarios de Investigación de la Universidad de Extremadura, en el que se disponía de una superficie amplia y libre de objetos para tomar medidas en un escenario lo más cercano a lo ideal.
+Para la toma de datos se consideraron dos escenarios: el primero el Laboratorio de Robótica 0L3 del Instituto de Computación Científica Avanzada de la Universidad de Extremadura (ICCAEx), situado en los Institutos Universitarios de Investigación de la Universidad de Extremadura en Badajoz, en el que se disponía de una superficie amplia y libre de objetos para tomar medidas en un escenario lo más cercano a lo ideal.
 
-El segundo escenario fue la segunda planta del edificio B de la facultad de Física de la Universidad de Extremadura, elegido para acercarse a una disposición más general, con obstáculos entre las balizas y el objetivo.
+El segundo escenario fue la segunda planta del edificio B de la Facultad de Física de la Universidad de Extremadura, elegido para acercarse a una disposición más general, con obstáculos entre las balizas y el objetivo.
 
 \subsection{Toma de medidas}
 
 En todos los casos la toma de medidas siguió el mismo procedimiento: en base a una trayectoria fijada que atraviesa una serie de puntos en cada escenario se toman un número prefijado de datos a partir de los sensores, con el robot parado en cada uno de dichos puntos.
 
-Para determinar el número de medidas a tomar en cada caso se realizaron tomas de medidas previas para determinar la naturaleza de los datos obtenidos.
+Para determinar el número de valores a recoger en cada caso se realizaron tomas de medidas previas para determinar la naturaleza de los datos obtenidos.
 En todos los casos se obtuvo una distribución de tipo gaussiano, como se puede ver en la figura \ref{fig:datos_sensor}, por lo que se tomaron 50 datos en el caso del laboratorio y 250 en el caso del edificio de Física con el objetivo tener una dispersión al menos menor de 2cm tomando el mínimo número de datos.
 
 \begin{figure}[H]
@@ -32,14 +32,14 @@ En los casos en los que la dispersión fue excesiva, se procedió a repetir de n
 En las primeras tomas, donde se orientaba el robot hacia el siguiente punto de tal forma que su desplazamiento tomase el menor tiempo posible, se observó que el diseño de las antenas de los sensores utilizados, con una ganancia ligeramente dependiente del ángulo de incidencia \cite{ang}, hacía que, al girar el sensor asignado como objetivo, la estimación de su posición variase.
 
 Esta observación también ha sido recogida en trabajos previos \cite{MSTesis}, donde se intentaba corregir a partir de medidas con distintos ángulos de incidencia.
-Esto no es posible en el caso de este trabajo, ya que no versa sobre el desarrollo de un algoritmo de posicionamiento, sino sobre la precisión del ya implementado.
+Esto no es posible en el caso de este trabajo, ya que no versa sobre el desarrollo de un algoritmo de posicionamiento, sino sobre el estudio la precisión del ya implementado.
 El algoritmo utilizado es propiedad de la empresa fabricante de los sensores, que no ha liberado detalles sobre su implementación, lo que hace imposible cualquier corrección.
 
 Así, para minimizar este obstáculo todas las medidas que figuran en los resultados están tomadas colocando al robot con el mismo ángulo respecto a las balizas, de tal manera que no es necesario considerar variaciones en la posición obtenida debido a su orientación.
 
-\subsection{Laboratorio}
+\subsection{Laboratorio de Robótica del ICCAEx}
 
-La primera toma de medidas tuvo lugar en el laboratorio 0L3 de los Institutos Universitarios de Investigación, donde se disponía de una superficie de aproximadamente 5 metros por 7 metros completamente libre para usar por el robot.
+La primera toma de medidas tuvo lugar en el laboratorio 0L3 del ICCAEx, donde se disponía de una superficie de aproximadamente 5 metros por 7 metros completamente libre para usar por el robot.
 
 Debido a la libertad a la hora de recorrer dicha superficie se eligieron tres trayectorias que cubriesen todos los puntos a evaluar, establecidos en una cuadrícula con una separación de 1 metro entre cada uno de ellos de tal forma que se evitase un posible sesgo en el movimiento del robot.
 
@@ -80,6 +80,8 @@ Teniendo en cuenta que el sistema empleado solo utiliza cuatro de las balizas pa
 
 La altura a la que fueron colocadas los sensores que actúan como balizas se vio restringida por el mobiliario del laboratorio, de modo que la mayoría se encontraban a unos 180cm del suelo con una de ellas a 80cm y otra a 200cm, aunque el sistema de los sensores permite estas diferencias de alturas en el modo de configuración manual de las balizas.
 
+En la figura \ref{fig:lab_sensores} es posible comprobar la posición respecto a los puntos de medida de las balizas en ambas configuraciones.
+
 \begin{figure}[H]
   \begin{subfigure}[b]{.5\textwidth}
     \centering
@@ -100,7 +102,7 @@ La altura a la que fueron colocadas los sensores que actúan como balizas se vio
   \label{fig:lab_sensores}
 \end{figure}
 
-\subsection{Edificio de la facultad de Física}
+\subsection{Edificio de la Facultad de Física}
 
 En el segundo escenario aparecen elementos más cercanos a una implementación de un sistema de posicionamiento local habitual: obstáculos en las balizas, que no es posible colocar en cualquier lugar, y un tránsito de personas habitual que podía interferir en la señal del sistema utilizado.
 
@@ -125,7 +127,7 @@ En este caso todas las medidas fueron tomadas utilizando la misma trayectoria, q
   \label{fig:fisica}
 \end{figure}
 
-Al igual que en el caso del laboratorio, se repitieron las medidas con distintas configuraciones de las balizas, con tres alternativas en este caso: 4, 6 y 8 balizas repartidas de la forma más uniforme posible.
+Al igual que en el caso del laboratorio, se repitieron las medidas con distintas configuraciones de las balizas, con tres alternativas en este caso: 4, 6 y 8 balizas repartidas de la forma más uniforme posible tal y como se indica en la figura \ref{fig:sensores_fisica}.
 
 \begin{figure}[H]
   \begin{subfigure}[b]{.3\textwidth}
@@ -133,22 +135,22 @@ Al igual que en el caso del laboratorio, se repitieron las medidas con distintas
     \def\svgwidth{0.9\linewidth}
     \input{./fig/fisica_4sens.pdf_tex} 
     \caption{4 balizas}
-    \label{fig:puntos}
+    \label{fig:sensores_fisica_4}
   \end{subfigure}
   \begin{subfigure}[b]{.3\textwidth}
     \centering
     \def\svgwidth{0.9\linewidth}
     \input{./fig/fisica_6sens.pdf_tex}  
     \caption{6 balizas}
-    \label{fig:espiral}
+    \label{fig:sensores_fisica_6}
   \end{subfigure}
   \begin{subfigure}[b]{.3\textwidth}
-      \centering
-      \def\svgwidth{0.9\linewidth}
-      \input{./fig/fisica_8sens.pdf_tex}  
-      \caption{8 balizas}
-      \label{fig:vertical}
-    \end{subfigure}
+    \centering
+    \def\svgwidth{0.9\linewidth}
+    \input{./fig/fisica_8sens.pdf_tex}  
+    \caption{8 balizas}
+    \label{fig:sensores_fisica_8}
+  \end{subfigure}
   \caption{Configuraciones de las balizas en el edificio de Física}
   \label{fig:sensores_fisica}
 \end{figure}
@@ -156,4 +158,4 @@ Al igual que en el caso del laboratorio, se repitieron las medidas con distintas
 Como en el caso del laboratorio, el kit de sensores UWB utilizado solo usa 4 de las balizas disponibles para estimar la posición del objetivo, por lo que el número mayor de sensores colocados permite una mayor libertad al elegir las balizas con mejor recepción de la señal pero no afinar la estimación con un número mayor de muestras para determinar la intersección de las curvas que definen.
 
 Como es posible ver en la figura \ref{fig:sensores_fisica} la posición de los sensores no es completamente uniforme, debido a que no toda la superficie de la planta estaba disponible por la disposición de los despachos y laboratorios.
-En este caso la altura de todas las balizas fue similar, en torno a los 170cm respecto al suelo.
+En este caso la altura de todas las balizas fue similar, a 170cm respecto al suelo.

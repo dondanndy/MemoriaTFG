@@ -9,7 +9,7 @@ La primera de las opciones para estimar la posición de un objetivo se basa en l
 Esta técnica requiere un mapeado previo de la zona de interés que permita obtener un modelo contra el que comparar en su uso posterior.
 La dependencia en un modelo previo provoca que cualquier modificación del entorno --como por ejemplo tránsito de personas-- hace que la estimación sea en el mejor de los casos ligeramente distinta y en el peor, imposible.
 
-La comparación contra el modelo hace uso de algoritmos estadísticos como \textit{k-nearest-neighbor} o \textit{support vector regression}, que buscan minimizar la diferencia entre las medidas y dicho modelo. 
+La comparación contra el modelo hace uso de algoritmos de \textit{machine learning} como \textit{k-nearest-neighbor} o \textit{support vector regression}, que buscan minimizar la diferencia entre las medidas y dicho modelo. 
 Requieren, de forma general, una capacidad computacional mayor a las alternativas geométricas, por lo que son usados habitualmente en entornos con obstáculos estáticos y sin demasiadas modificaciones, donde su ventaja es significativa.
 
 \subsubsection{Técnicas geométricas}
@@ -39,7 +39,7 @@ La matriz de Fisher se construye, en el caso de la parametrización del ruido co
 \begin{equation}
     [\mathcal{I}(\bm{\theta})]_{ij} = \frac{1}{\sigma^2} \sum_{n=0}^{N=1} \pdv{s[n,\bm{\theta}]}{\theta_i}\pdv{s[n,\bm{\theta}]}{\theta_j}
 \end{equation}
-donde $\bm{\theta}$ indica el vector con los parámetros a evaluar -- como el tiempo en TOA o el ángulo en AOA--, $\sigma$ la desviación del ruido blanco gaussiano, $N$ el número de balizas utilizadas y $s[n,\bm{\theta}]$ la señal emitida por la baliza $n$, sin ningún ruido.
+donde $\bm{\theta}$ indica el vector con los parámetros a evaluar, $\sigma$ la desviación del ruido blanco gaussiano, $N$ el número de balizas utilizadas y $s[n,\bm{\theta}]$ la señal emitida por la baliza $n$, sin ningún ruido.
 
 Así, la varianza de cada uno de los parámetros a estimar vendrá dada como
 \begin{equation}
@@ -210,9 +210,6 @@ por lo que la función característica de este algoritmo será la distancia de c
 Esta técnica requiere el uso de antenas direccionales, lo que hace que aumente el coste de su implantación.
 
 En este caso solo necesitamos el ángulo respecto a las balizas, por lo que su implantación será más adecuada en situaciones en las que el cálculo de la distancia entre objetivo y balizas no es fiable o como apoyo o correción junto con TOA o TDOA.
-% Su uso principal se encuentra en el posicionamiento de teléfonos móviles a partir de la señal de la torres de servicio: las grandes distancias a las que se encuentran aumentan la posibilidad de encontrar una gran atenuación y ruido, por lo que la determinación de la distancia de forma directa es, en general, inviable.
-
-% \subsubsection{Límites teóricos}
 
 Para el AOA el CRLB, que nos dará el mínimo de varianza para el ángulo de incidencia vendrá dado, en el caso de balizas colocadas a lo largo de un eje de la forma mostrada en la Figura \ref{fig:AOA} por \cite{Xbook, shim2018}
 \begin{equation}
@@ -226,78 +223,78 @@ En el planteamiento de los algoritmos geométricos se suponía una línea de vis
 
 La presencia de obstáculos que impidan un trayecto de la señal parametrizable o generen rebotes en la zona de interés pueden provocar un posicionamiento erróneo o, en el peor de los casos, imposible.
 
-Para mitigar la modificación en la señal en estos casos se recurre a técnicas estadísticas que se dividen en dos grupos: técnicas paramétricas, en las que ajustamos el error a una distribución de probabilidad conocida, y técnicas no paramétricas, en la que no asumimos ninguna distribución a priori.
+Para mitigar la modificación en la señal en estos casos se recurre a técnicas estadísticas que se dividen en dos grupos: técnicas paramétricas, en las que se realiza un ajuste del error a una distribución de probabilidad conocida, y técnicas no paramétricas, en la que no se asume ninguna distribución a priori.
 
-\subsubsubsection{Técnicas paramétricas}
+% \subsubsubsection{Técnicas paramétricas}
 
-El primer grupo de técnicas consiste en aplicar argumentos estadísticos de tal forma que es posible ajustar la señal recibida en el objetivo a una cierta función de probabilidad, de tal manera que es posible filtrar en cierta medida el ruido y las interferencias que acompañan al pulso original \cite{Zafer}.
+% El primer grupo de técnicas consiste en aplicar argumentos estadísticos de tal forma que es posible ajustar la señal recibida en el objetivo a una cierta función de probabilidad, de tal manera que es posible filtrar en cierta medida el ruido y las interferencias que acompañan al pulso original \cite{Zafer}.
 
-Definiendo como $\bm{\theta} = [x,y,\lambda]^T$ el vector que contiene los parámetros de la distribución, podemos establecer una función de probabilidad del ruido introducido en la señal como
-\begin{equation}
-    p(r|\bm{\theta})
-\end{equation}
-indicando la probabilidad de densidad de $r$ conociendo $\bm{\theta}$.
+% Definiendo como $\bm{\theta} = [x,y,\lambda]^T$ el vector que contiene los parámetros de la distribución, podemos establecer una función de probabilidad del ruido introducido en la señal como
+% \begin{equation}
+%     p(r|\bm{\theta})
+% \end{equation}
+% indicando la probabilidad de densidad de $r$ conociendo $\bm{\theta}$.
 
-A partir de esta función de probabilidad es posible aplicar estimadores Bayesianos, principalmente el mínimo error cuadrático medio (MMSE, \textit{minimum mean square error}) definido como
-\begin{equation}\label{eq:MMSE}
-    \hat{\bm{\theta}}_{\text{MMSE}} = E\{\bm{\theta}|\vb{r}\}
-\end{equation}
-con $E\{\bm{\theta}|\vb{r}\}$ como el valor esperado de $\bm{\theta}$ dado $\vb{r}$, o el estimador de máximos a posteriori (MAP), definido como
-\begin{equation}
-    \hat{\bm{\theta}}_{\text{MAP}} = \argmax_{\bm{\theta}} p(\bm{\theta}|r)
-\end{equation}
+% A partir de esta función de probabilidad es posible aplicar estimadores Bayesianos, principalmente el mínimo error cuadrático medio (MMSE, \textit{minimum mean square error}) definido como
+% \begin{equation}\label{eq:MMSE}
+%     \hat{\bm{\theta}}_{\text{MMSE}} = E\{\bm{\theta}|\vb{r}\}
+% \end{equation}
+% con $E\{\bm{\theta}|\vb{r}\}$ como el valor esperado de $\bm{\theta}$ dado $\vb{r}$, o el estimador de máximos a posteriori (MAP), definido como
+% \begin{equation}
+%     \hat{\bm{\theta}}_{\text{MAP}} = \argmax_{\bm{\theta}} p(\bm{\theta}|r)
+% \end{equation}
 
-A partir del teorema de Bayes tenemos que
-\begin{equation}
-    p(\bm{\theta}|r) = \frac{p(r|\bm{\theta})p(\bm{\theta})}{p(r)}
-\end{equation}
-por lo que maximizar $p(\bm{\theta}|r)$ equivale a maximizar $p(r|\bm{\theta})p(\bm{\theta})$ y así tenemos que la estimación a posteriori será \cite{Xbook}
-\begin{equation}\label{eq:MAP}
-    \hat{\bm{\theta}}_{\text{MAP}} = \argmax_{\bm{\theta}} p(r|\bm{\theta})p(\bm{\theta})
-\end{equation}
-o de forma equivalente
-\begin{equation}
-    \hat{\bm{\theta}}_{\text{MAP}} = \argmax_{\bm{\theta}} [\ln(p(r|\bm{\theta})) + \ln(p(\bm{\theta})) ]
-\end{equation}
-con $p(\bm{\theta})$ como la información a priori de la distribución de probabilidad del ruido de la señal.
+% A partir del teorema de Bayes tenemos que
+% \begin{equation}
+%     p(\bm{\theta}|r) = \frac{p(r|\bm{\theta})p(\bm{\theta})}{p(r)}
+% \end{equation}
+% por lo que maximizar $p(\bm{\theta}|r)$ equivale a maximizar $p(r|\bm{\theta})p(\bm{\theta})$ y así tenemos que la estimación a posteriori será \cite{Xbook}
+% \begin{equation}\label{eq:MAP}
+%     \hat{\bm{\theta}}_{\text{MAP}} = \argmax_{\bm{\theta}} p(r|\bm{\theta})p(\bm{\theta})
+% \end{equation}
+% o de forma equivalente
+% \begin{equation}
+%     \hat{\bm{\theta}}_{\text{MAP}} = \argmax_{\bm{\theta}} [\ln(p(r|\bm{\theta})) + \ln(p(\bm{\theta})) ]
+% \end{equation}
+% con $p(\bm{\theta})$ como la información a priori de la distribución de probabilidad del ruido de la señal.
 
-En el caso de las señales utilizadas, dicha distribución a priori es a veces exponencial si en el camino recorrido se espera un gran número de obstáculos o, de forma más habitual, de tipo gaussiano.
+% En el caso de las señales utilizadas, dicha distribución a priori es a veces exponencial si en el camino recorrido se espera un gran número de obstáculos o, de forma más habitual, de tipo gaussiano.
 
-En los casos en los que esta información a priori no es conocida es posible utilizar un estimador por máxima similitud de tal forma que la estimación será
-\begin{equation}\label{eq:ML}
-    \hat{\bm{\theta}}_{\text{ML}} = \argmax_{\bm{\theta}} p(r|\bm{\theta})
-\end{equation}
-donde la función de similitud vendrá dada por
-\begin{equation}
-    p(r|\bm{\theta}) = p_n(\vb{r} - \vb{f}|\bm{\theta})
-\end{equation}
-a partir de \eqref{eq:geom}.
-$p_n(\cdot | \bm{\theta})$ indica la función de probabilidad del vector de ruido condicionada por los parámetros de $\bm{\theta}$.
+% En los casos en los que esta información a priori no es conocida es posible utilizar un estimador por máxima similitud de tal forma que la estimación será
+% \begin{equation}\label{eq:ML}
+%     \hat{\bm{\theta}}_{\text{ML}} = \argmax_{\bm{\theta}} p(r|\bm{\theta})
+% \end{equation}
+% donde la función de similitud vendrá dada por
+% \begin{equation}
+%     p(r|\bm{\theta}) = p_n(\vb{r} - \vb{f}|\bm{\theta})
+% \end{equation}
+% a partir de \eqref{eq:geom}.
+% $p_n(\cdot | \bm{\theta})$ indica la función de probabilidad del vector de ruido condicionada por los parámetros de $\bm{\theta}$.
 
-En el caso de componentes de ruido independientes esta función de probabilidad será
-\begin{equation}
-    p_n(\vb{r} - \vb{f}|\bm{\theta}) = \prod_i^{N} p_{n_i}(r_i - f_i|\bm{\theta})
-\end{equation}
-donde, como en el caso de la estimación a posteriori, la parametrización habitual es la de una distribución gaussiana para cada componente.
+% En el caso de componentes de ruido independientes esta función de probabilidad será
+% \begin{equation}
+%     p_n(\vb{r} - \vb{f}|\bm{\theta}) = \prod_i^{N} p_{n_i}(r_i - f_i|\bm{\theta})
+% \end{equation}
+% donde, como en el caso de la estimación a posteriori, la parametrización habitual es la de una distribución gaussiana para cada componente.
 
-Esta asunción es generalmente válida en el caso de TOA, AOA o RSS, donde el ruido de cada baliza no interferirá en los otros.
-No será el caso de las estimaciones con TDOA, donde en el cálculo de los parámetros de interés intervendrá el ruido generado en la señal de al menos dos balizas, por lo que es necesario establecer una mínima correlación.
+% Esta asunción es generalmente válida en el caso de TOA, AOA o RSS, donde el ruido de cada baliza no interferirá en los otros.
+% No será el caso de las estimaciones con TDOA, donde en el cálculo de los parámetros de interés intervendrá el ruido generado en la señal de al menos dos balizas, por lo que es necesario establecer una mínima correlación.
 
-Cabe recordar que en los casos ideales ya se tenía en consideración un cierto ruido en el transporte de la señal.
-En los casos no ideales tratados ahora --como puede ser por ejemplo la presencia de obstáculos-- no se deja de considerar aquella primera aproximación, por lo que las funciones de probabilidad tratadas en total tendrán dos componentes: el del caso ideal más una nueva componente fruto del nuevo entorno.
+% Cabe recordar que en los casos ideales ya se tenía en consideración un cierto ruido en el transporte de la señal.
+% En los casos no ideales tratados ahora --como puede ser por ejemplo la presencia de obstáculos-- no se deja de considerar aquella primera aproximación, por lo que las funciones de probabilidad tratadas en total tendrán dos componentes: el del caso ideal más una nueva componente fruto del nuevo entorno.
 
-\subsubsection{Técnicas no paramétricas}
+% \subsubsection{Técnicas no paramétricas}
 
-En los casos en los que no es posible conocer una distribución a priori del ruido ni modelizarlo con una cierta distribución de probabilidad se recurre habitualmente a un ajuste de mínimos cuadrados.
-Así, definiendo $\vb{z} = [x,y]^T$ como la posición desconocida del objetivo, $\vb{z}_i$ la posición de la baliza $i$ y $r_i$ la distancia obtenida entre el objetivo y dicha baliza se tiene \cite{MAIN}
-\begin{equation}
-    \hat{\vb{z}} = \argmin_{\vb{z}} \sum_i(r_i - ||\vb{z} - \vb{z}_i||)^2
-\end{equation}
-con $||\vb{z} - \vb{z}_i||$ como el módulo euclídeo indicando la distancia entre cada baliza y el objetivo.
+% En los casos en los que no es posible conocer una distribución a priori del ruido ni modelizarlo con una cierta distribución de probabilidad se recurre habitualmente a un ajuste de mínimos cuadrados.
+% Así, definiendo $\vb{z} = [x,y]^T$ como la posición desconocida del objetivo, $\vb{z}_i$ la posición de la baliza $i$ y $r_i$ la distancia obtenida entre el objetivo y dicha baliza se tiene \cite{MAIN}
+% \begin{equation}
+%     \hat{\vb{z}} = \argmin_{\vb{z}} \sum_i(r_i - ||\vb{z} - \vb{z}_i||)^2
+% \end{equation}
+% con $||\vb{z} - \vb{z}_i||$ como el módulo euclídeo indicando la distancia entre cada baliza y el objetivo.
 
-En el caso de mediciones con TDOA este módulo debe ser modificado para adecuarse a la naturaleza hiperbólica de la curvas de las que se busca la intersección.
+% En el caso de mediciones con TDOA este módulo debe ser modificado para adecuarse a la naturaleza hiperbólica de la curvas de las que se busca la intersección.
 
-En condiciones reales los ajustes de mínimos cuadrados se ven muy contaminados por los escenarios sin visión directa y las incertidumbres de los sensores, por lo que habitualmente se usan ciertos pesos en las medidas de cada una de las balizas para favorecer a aquellas en las que la recepción es más favorable.
+% En condiciones reales los ajustes de mínimos cuadrados se ven muy contaminados por los escenarios sin visión directa y las incertidumbres de los sensores, por lo que habitualmente se usan ciertos pesos en las medidas de cada una de las balizas para favorecer a aquellas en las que la recepción es más favorable.
 
 \subsection{Tecnologías}
 
@@ -340,7 +337,7 @@ Este tipo de técnicas tiene una precisión muy baja, en torno a metros, y es mu
 
 \subsubsection{Wi-Fi}
 
-Volviendo al espectro electromagnético las señales de Wi-Fi son también una alternativa a la hora de determinar distancias por el decaimiento de su intensidad con la distancia. 
+En el espectro electromagnético las señales de Wi-Fi son también una alternativa a la hora de determinar distancias por el decaimiento de su intensidad con la distancia.
 Su atractivo principal es, como en otras tecnologías, el aprovechamiento de las infraestructuras y el desarrollo ya existente.
 
 Aunque también es posible su uso con TOA y AOA, su uso principal se restringe a técnicas de \textit{fingerprinting}, ya que habitualmente los puntos de acceso Wi-Fi usados para la conexión a internet no suelen superar la unidad por planta o edificio.
@@ -373,8 +370,8 @@ Entre otras alternativas se encuentran también de comunicaciones a muy corta di
 
 \subsection{Ultra-Wide Band}
 
-El Ultra-Wide Band (UWB) se define coma una emisión de radiofrecuencia con un ancho de banda de al menos 500 MHz o más del 20\% de la frecuencia central.
-Su definiciópn técnica se recoge en el estándar 802.15.4 del IEEE junto con otras redes inalámbricas de área personal.
+El Ultra-Wide Band (UWB) se define como una emisión de radiofrecuencia con un ancho de banda de al menos 500 MHz o más del 20\% de la frecuencia central.
+Su definición técnica se recoge en el estándar 802.15.4 del IEEE junto con otras redes inalámbricas de área personal.
 
 Los canales usados y las potencias permitidas tienen distintas legislaciones según el país que se trate.
 En el caso de Europa, la regulación del Instituto Europeo de Normas de Telecomunicaciones (ETSI) permite emisiones en los rangos de frecuencia $3.1 - 4.8\si{\giga\hertz}$, destinado a localización de servicios de emergencia y  $6.0 - 9.0\si{\giga\hertz}$ para localización general \cite{UWB_regs}.
@@ -406,7 +403,7 @@ La tasa de datos viene dada por capacidad de un canal, dada en bits/sec como\cit
 \end{equation}
 siendo $B$ el ancho de banda de dicho canal y considerando ruido blanco gaussiano en el transporte de la señal.
 
-Esta gran capacidad es la que convierte al UWB una gran alternativa para el transporte de datos, aunque su adopción en este ámbito no es hasta el momento demasiado amplia.
+Esta gran capacidad es la que convierte al UWB una de las mejores alternativas para el transporte de datos, aunque su adopción en este ámbito no es hasta el momento demasiado amplia.
 
 Otra de las características del UWB es su eficiencia energética.
 Aunque es posible entender este término de distintas formas, a la hora de realizar comparaciones se suele recurrir a la capacidad por unidad de potencia o al tiempo de uso permitido con sensores alimentados con baterías.
@@ -420,7 +417,7 @@ Aun así, es habitual el uso de técnicas de detección y evasión (DAA), en las
 
 \subsubsection{Pulsos de UWB}
 
-En el diseño de sistemas de UWB la elección de la forma del pulso es crucial, ya que determina la respuesta en frecuencias.
+En el diseño de sistemas de UWB la elección de la forma del pulso es crucial, ya que determina la respuesta en frecuencias como se muestra en la figura \ref{fig:Pulsos}.
 Los pulsos mayoritariamente tienen perfiles gaussianos, aunque con distintas características \cite{Du}.
 
 La primera opción es el uso de una forma gaussiana clásica
@@ -513,6 +510,7 @@ Sucesivas derivaciones de \eqref{eq:pulso_gauss} tendrán el mismo resultado, co
     \node at ($(group c1r1) + (3.5cm,-4.0cm)$) {\ref{grouplegend}}; 
 \end{tikzpicture}
 \caption{Respuesta en los dominios de tiempo y de frecuencia de los distintos tipos de pulsos de UWB de 500ps, normalizados en ambos casos}
+\label{fig:Pulsos}
 \end{figure}
 
 La señal generada por las balizas será una sucesión de los pulsos anteriores, de tal manera que puede modelizarse como
@@ -525,17 +523,18 @@ Con la adición de ruido blanco gaussiano y teniendo en cuenta las técnicas geo
 
 \subsection{Robot}
 
-Con el fin de automatizar la toma de medidas para hacerla lo más eficiente posible se usó un robot móvil capaz de desplazarse siguiendo un recorrido preestablecido.
+Con el fin de automatizar la toma de medidas para hacerla lo más eficiente posible se usó un robot móvil capaz de desplazarse mediante navegación autónoma en un entorno conocido.
 
 El elegido en este caso fue el robot TurtleBot 2, un robot con fines educativos y de investigación capaz de desplazarse y orientarse con total libertad en superficies llanas, como era el caso en el que nos encontrábamos.
 
-El TurtleBot funciona con ROS --Robot Operating System, en inglés--, un entorno de trabajo enfocado a robot que cuenta con diversas librerías para distintos casos de uso, entre ellos la navegación en un entorno controlado como la que se da en el caso de este trabajo.
+\textbf{El TurtleBot funciona con ROS --Robot Operating System, en inglés--, un entorno de trabajo enfocado a los sistemas robóticos encargado del soporte para todos los dispositivos hardware del robot como motores, encoders o cámaras. 
+Cuenta con diversas librerías para distintos casos de uso, entre las que se encuentra la navegación en un entorno controlado como la que se da en el caso de este trabajo.}
 
 Dentro de los paquetes disponibles, el usado en el desarrollo del trabajo es el encargado de la navegación del robot, que permite desplazar al robot a cualquier punto del entorno.
 
-Es posible acoplar al robot un sistema de cámaras y láser llamado Kinect, desarrollado en primera instancia para el uso en videojuegos pero con uso también en labores de investigación al permitir el posicionamiento de objetos y paredes respecto al dicho sistema, de tal manera que permite evitar obstáculos dinámicos en el caso de que interpongan en su camino.
+Es posible acoplar al robot un sistema de visión que, mediante luz estructura, permite obtener un mapa de profundidad, llamado Kinect, desarrollado en primera instancia para el uso en videojuegos pero con uso también en labores de investigación al permitir el posicionamiento de objetos y paredes respecto al dicho sistema, de tal manera que permite evitar obstáculos dinámicos en el caso de que interpongan en su camino.
 
-Disponiendo de este añadido, la librería de navegación permite un mapeado autónomo tomando como referencias los datos de odometría que proporcionan los motores propulsores del robot para determinar las dimensiones del entorno.
+Con esta herramienta la librería de navegación permite un mapeado autónomo tomando como referencias los datos de odometría que proporcionan los motores propulsores del robot para determinar las dimensiones del entorno.
 
 En el caso de disponer de antemano de dichas dimensiones es posible proporcionar un mapa al sistema de navegación y evitar el paso de reconocimiento del entorno.
 Esto no solo ahorra el tiempo, si no que además minimiza las posibles discrepancias entre los datos de odometría y los desplazamientos reales del robot al realizar el mapeado de forma autónoma.
@@ -545,10 +544,10 @@ Así, a partir de los límites establecidos y comprobados de forma manual, las p
 
 \subsection{Sensores UWB}
 
-Aunque el uso de UWB para el posicionamiento no está, al escribir este trabajo, utilizado de forma masiva existen varias implementaciones comerciales que hacen uso de las técnicas geométricas mencionadas en secciones anteriores.
+Aunque el uso de UWB para el posicionamiento no está, al escribir este trabajo, utilizado de forma masiva, existen varias implementaciones comerciales que hacen uso de las técnicas geométricas mencionadas en secciones anteriores.
 A pesar de que el uso de sensores propios es habitual, la adaptación de teléfonos móviles para la estimación de la posición también ha sido explorada por empresas como BeSpoon, a la espera de una implantación mayoritaria de hardware compatible en el diseño de estos dispositivos.
 
-Los sensores utilizados han sido los pertenecientes al kit MDEK1001 ofertado por DecaWave, llamados DWM1001 de forma individual.
+Los sensores utilizados han sido los pertenecientes al kit MDEK1001 ofertado por la empresa DecaWave, llamados DWM1001 de forma individual.
 Se trata de un sistema que ofrece, con una configuración mínima, la posibilidad de usar cualquiera de los componentes como baliza u objetivo.
 Además, implementa un algoritmo de posicionamiento con al menos tres balizas de, según el fabricante, hasta 10cm de precisión con visión directa \cite{Decawave}.
 

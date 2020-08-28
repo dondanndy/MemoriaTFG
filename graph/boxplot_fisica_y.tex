@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+    \begin{axis}[
+        x = 0.25\textwidth,
+        boxplot/draw direction=y,
+        ymajorgrids,
+        xtick={1,2,3},
+        xticklabels={4 bal., 6 bal., 8 bal.},
+        ]
+        \addplot+ [boxplot] table[y index=1] {data/4sens_fisica.txt};
+        \addplot+ [boxplot] table[y index=1] {data/6sens_fisica.txt};
+        \addplot+ [boxplot] table[y index=1] {data/8sens_fisica.txt};
+    \end{axis}
+\end{tikzpicture}
