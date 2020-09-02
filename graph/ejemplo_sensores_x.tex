@@ -1,7 +1,9 @@
 \begin{tikzpicture}
-\begin{axis}[width = \textwidth, height = 0.9\textwidth,ymin=0,xlabel={Posición (cm)}]
-    \addplot [hist={bins=10,data=x}, fill=black!50]
+\begin{axis}[width = \textwidth, height = 0.9\textwidth,ymin=0,xlabel={Posición [cm]}]
+    \addplot [hist={bins=10,data=x}, fill=black!40]
     table {data/ejemplo_sensores.txt};
     % table [x index=0, y index=1, z index=3] {data/ejemplo_sensores.txt};
+    
+    \addplot[black, ultra thick, dashed, domain=0.65:0.76]{(1/0.019)*exp(-0.5*((x-0.701446)/0.019)^2)};
 \end{axis}
 \end{tikzpicture}

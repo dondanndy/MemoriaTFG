@@ -15,6 +15,7 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
+\usepackage[font=small,justification=centering]{caption}
 \usepackage{subcaption}
 \usetikzlibrary{arrows,shapes,positioning,calc,babel,pgfplots.groupplots, pgfplots.statistics}
 \usepackage{pgfkeys} % LATEX
@@ -23,17 +24,22 @@
 \usepackage{bm}
 \usepackage{pdfpages}
 \usepackage{siunitx}
+\usepackage{multirow}
 % \usepackage{multicol}
 % \usepackage{afterpage}
 \usepackage{xcolor}
 \usepackage{soul}
 \usepackage{float}
+\usepackage{listings}
 \usepackage{titlesec}
 \usepackage{hyperref}
 \usepackage[italicdiff]{physics}
 \usepackage[bottom=2.5cm, top = 2.5cm, right=2.5cm, left=2.5cm, bindingoffset=0.5cm]{geometry}
+\usepackage[onehalfspacing]{setspace}
 
 % \sethlcolor{blue!30}
+% \renewcommand{\baselinestretch}{1.5}
+% \linespread{1.5}
 
 
 % SUBSUBSUBSECTION -------------------------------------------------------------------------------------------
@@ -176,7 +182,7 @@ Fdo. Carlos Javier García Orellana
 %------------------------------------------------------------------------------
 
 \newpage
-\section{Conclusión}
+\section{Conclusiones}
 
 \input{tex/conclusion.tex}
 
@@ -192,4 +198,18 @@ Fdo. Carlos Javier García Orellana
     \bibliography{refs} 
     \bibliographystyle{ieeetr}
 \endgroup
+
+
+%------------------------------------------------------------------------------
+%                             Apéndices
+%------------------------------------------------------------------------------
+
+\newpage
+\section{Apéndice 1}
+\input{tex/apendice_datos.tex}
+
+\newpage
+\section{Apéndice 2}
+\input{tex/apendice_codigo.tex}
+
 \end{document}

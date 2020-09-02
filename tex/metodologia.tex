@@ -2,6 +2,33 @@ Para la toma de datos se consideraron dos escenarios: el primero el Laboratorio 
 
 El segundo escenario fue la segunda planta del edificio B de la Facultad de Física de la Universidad de Extremadura, elegido para acercarse a una disposición más general, con obstáculos entre las balizas y el objetivo.
 
+\subsection{Simulación previa}
+
+Antes de proceder a la toma de medidas en las dos localizaciones escogidas se escribió el código responsable de los nodos de ROS que desplazaban al robot y recogían los datos de posicionamiento con la ayuda del simulador Stage.
+Todo este código y su estructura figura en el Apéndice 2.
+
+Además de el código del nodo, también es necesario construir el mapa sobre el que la navegación del robot construye el planner global y así conocer la posición y el movimiento del robot.
+En el caso del laboratorio, dicho mapa estaba ya construido al ser localización habitual de investigación con el Turtlebot.
+
+No fue así en para el edificio de Física.
+En una primera instancia se recurrió a los planos de construcción, a la espera de posibles correcciones con la obtención de las dimensiones reales de la planta con un medidor láser.
+
+Finalmente estas correcciones fueron necesarias, ya que los planos no respetaban completamente las medidas reales de los pasillos de la planta que debía recorrer el robot.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{pic/Trayectoria.png}
+  \caption{Captura de \textit{rviz} con el primer mapa del edificio de Física, sin columnas.}
+  \label{fig:plano_fisica}
+\end{figure}
+
+Además, por simplicidad la primera aproximación del mapa no incluía las columnas de la planta, como se puede observar en la Figura \ref{fig:plano_fisica}.
+Aunque la superficie que ocupan en el plano es pequeña, una primera toma de medidas con el robot hizo evidente que su reconocimiento por parte de los sensores que incorpora llevaba a las rutinas de posicionamiento local a equívocos a la hora de relacionar estas columnas con las paredes del mapa proporcionado.
+Esto hacía que los valores obtenidos por el posicionamiento local del robot tuviesen discrepancias de hasta 50cm respecto a la posición real, medida de forma manual.
+
+Por ello se procedió a crear un nuevo mapa con dichas columnas.
+En este caso el posicionamiento del robot mejoró de forma significativa, siendo capaz de identificar las columnas con solvencia y reduciendo las discrepancias observadas a unos 10cm, mismos valores que se obtenían en el laboratorio.
+
 \subsection{Toma de medidas}
 
 En todos los casos la toma de medidas siguió el mismo procedimiento: en base a una trayectoria fijada que atraviesa una serie de puntos en cada escenario se toman un número prefijado de datos a partir de los sensores, con el robot parado en cada uno de dichos puntos.
@@ -13,16 +40,16 @@ En todos los casos se obtuvo una distribución de tipo gaussiano, como se puede 
   \begin{subfigure}[b]{.5\textwidth}
     \centering
     \input{graph/ejemplo_sensores_x.tex} 
-    \caption{Eje x}
+    \caption{Eje $x$}
     \label{fig:hist_x}
   \end{subfigure}
   \begin{subfigure}[b]{.5\textwidth}
     \centering
     \input{graph/ejemplo_sensores_y.tex}
-    \caption{Eje y}
+    \caption{Eje $y$}
     \label{fig:hist_y}
   \end{subfigure}
-  \caption{Histograma del posicionamiento de los sensores en uno de los puntos}
+  \caption{Histograma de los datos de posicionamiento de los sensores en uno de los puntos del edificio de Física, con un ajuste a una curva gaussiana en cada caso.}
   \label{fig:datos_sensor}
 \end{figure}
 
@@ -39,7 +66,24 @@ Así, para minimizar este obstáculo todas las medidas que figuran en los result
 
 \subsection{Laboratorio de Robótica del ICCAEx}
 
-La primera toma de medidas tuvo lugar en el laboratorio 0L3 del ICCAEx, donde se disponía de una superficie de aproximadamente 5 metros por 7 metros completamente libre para usar por el robot.
+La primera toma de medidas tuvo lugar en el laboratorio 0L3 del ICCAEx, donde se disponía de una superficie de aproximadamente 5 metros por 7 metros completamente libre para usar por el robot como se puede ver en la Figura \ref{fig:foto_lab}.
+
+\begin{figure}[H]
+  \begin{subfigure}[b]{.5\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{pic/lab1.jpg}
+    % \caption{Eje x}
+    \label{fig:foto_lab1}
+  \end{subfigure}
+  \begin{subfigure}[b]{.5\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{pic/lab2.jpg}
+    % \caption{Eje y}
+    \label{fig:foto_lab2}
+  \end{subfigure}
+  \caption{Fotografías del laboratorio de Robótica del ICCAEx.}
+  \label{fig:foto_lab}
+\end{figure}
 
 Debido a la libertad a la hora de recorrer dicha superficie se eligieron tres trayectorias que cubriesen todos los puntos a evaluar, establecidos en una cuadrícula con una separación de 1 metro entre cada uno de ellos de tal forma que se evitase un posible sesgo en el movimiento del robot.
 
@@ -65,7 +109,7 @@ Debido a la libertad a la hora de recorrer dicha superficie se eligieron tres tr
         \caption{Trayectoria en vertical}
         \label{fig:vertical}
       \end{subfigure}
-    \caption{Disposición del laboratorio}
+    \caption{Disposición del laboratorio.}
     \label{fig:laboratorio}
 \end{figure}
 
@@ -98,15 +142,34 @@ En la figura \ref{fig:lab_sensores} es posible comprobar la posición respecto a
     \caption{6 balizas}
     \label{fig:lab_6sens}
   \end{subfigure}
-  \caption{Configuraciones de las balizas en el laboratorio}
+  \caption{Configuraciones de las balizas en el laboratorio.}
   \label{fig:lab_sensores}
 \end{figure}
 
 \subsection{Edificio de la Facultad de Física}
 
-En el segundo escenario aparecen elementos más cercanos a una implementación de un sistema de posicionamiento local habitual: obstáculos en las balizas, que no es posible colocar en cualquier lugar, y un tránsito de personas habitual que podía interferir en la señal del sistema utilizado.
+El segundo escenario se encontraba en la primera planta del edificio B de la Facultad de Física, en la que por razones estructurales se encuentran una serie de columnas como se puede observar en la Figura \ref{fig:foto_fisica}.
 
-En este caso todas las medidas fueron tomadas utilizando la misma trayectoria, que seguía los pasillos de la planta del edificio al no poder optar a más variaciones.
+En este escenario aparecen elementos más cercanos a una implementación de un sistema de posicionamiento local habitual: obstáculos en las balizas, que no es posible colocar en cualquier lugar, y un tránsito de personas habitual que podía interferir en la señal del sistema utilizado.
+
+\begin{figure}[H]
+  \begin{subfigure}[b]{.5\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{pic/fisica1.jpg}
+    % \caption{Eje x}
+    \label{fig:foto_fisica1}
+  \end{subfigure}
+  \begin{subfigure}[b]{.5\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{pic/fisica2.jpg}
+    % \caption{Eje y}
+    \label{fig:foto_fisica2}
+  \end{subfigure}
+  \caption{Fotografías del edificio B de la Facultad de Física.}
+  \label{fig:foto_fisica}
+\end{figure}
+
+En este caso todas las medidas fueron tomadas utilizando la misma trayectoria, que se puede observar en la Figura~\ref{fig:fisica}, que seguía los pasillos de la planta del edificio al no poder optar a más variaciones.
 
 \begin{figure}[H]
   \begin{subfigure}[b]{.5\textwidth}
@@ -123,7 +186,7 @@ En este caso todas las medidas fueron tomadas utilizando la misma trayectoria, q
     \caption{Trayectoria}
     \label{fig:trayecto_fisica}
   \end{subfigure}
-  \caption{Disposición de la planta del edificio de Física}
+  \caption{Disposición de la planta del edificio de Física.}
   \label{fig:fisica}
 \end{figure}
 
@@ -151,7 +214,7 @@ Al igual que en el caso del laboratorio, se repitieron las medidas con distintas
     \caption{8 balizas}
     \label{fig:sensores_fisica_8}
   \end{subfigure}
-  \caption{Configuraciones de las balizas en el edificio de Física}
+  \caption{Configuraciones de las balizas en el edificio de Física.}
   \label{fig:sensores_fisica}
 \end{figure}
 

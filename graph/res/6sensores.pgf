@@ -116,7 +116,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.444056in,y=4.405012in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Eje x}%
+\pgftext[x=1.444056in,y=4.405012in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Error en eje $x$}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -189,7 +189,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=1.444056in,y=2.305012in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Eje y}%
+\pgftext[x=1.444056in,y=2.305012in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Error en eje $y$}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -994,7 +994,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=4.166259in,y=4.483333in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Posición}%
+\pgftext[x=4.166259in,y=4.483333in,,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Error en posición [cm]}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfpathrectangle{\pgfqpoint{5.730944in}{0.742500in}}{\pgfqpoint{0.173250in}{3.465000in}}%

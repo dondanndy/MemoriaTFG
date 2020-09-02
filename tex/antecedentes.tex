@@ -94,7 +94,7 @@ para cada baliza.
     \centering
     \def\svgwidth{0.6\linewidth}
     \input{./fig/TOA.pdf_tex}
-	\caption{Posicionamiento por tiempo de vuelo (TOA)}
+	\caption{Posicionamiento por tiempo de vuelo (TOA).}
     \label{fig:TOA}
 \end{figure}
 
@@ -204,14 +204,14 @@ por lo que la función característica de este algoritmo será la distancia de c
     \centering
     \def\svgwidth{0.6\linewidth}
 	\input{./fig/AOA.pdf_tex}
-    \caption{Posicionamiento por ángulo de llegada (AOA)}
+    \caption{Posicionamiento por ángulo de llegada (AOA).}
     \label{fig:AOA}
 \end{figure}
 Esta técnica requiere el uso de antenas direccionales, lo que hace que aumente el coste de su implantación.
 
 En este caso solo necesitamos el ángulo respecto a las balizas, por lo que su implantación será más adecuada en situaciones en las que el cálculo de la distancia entre objetivo y balizas no es fiable o como apoyo o correción junto con TOA o TDOA.
 
-Para el AOA el CRLB, que nos dará el mínimo de varianza para el ángulo de incidencia vendrá dado, en el caso de balizas colocadas a lo largo de un eje de la forma mostrada en la Figura \ref{fig:AOA} por \cite{Xbook, shim2018}
+Para el AOA el CRLB, que nos dará el mínimo de varianza para el ángulo de incidencia vendrá dado, en el caso de balizas colocadas a lo largo de un eje de la forma mostrada en la Figura~\ref{fig:AOA} por \cite{Xbook, shim2018}
 \begin{equation}
     \sigma^2(\phi) = \frac{c^2}{2\pi^2 \text{SNR} \beta^2 N(N^2-1)d\cos(\phi)}
 \end{equation}
@@ -298,7 +298,7 @@ Para mitigar la modificación en la señal en estos casos se recurre a técnicas
 
 \subsection{Tecnologías}
 
-Todos los algoritmos geométricos mencionados necesitan un soporte físico para determinar las variables posicionales del objetivo que requieren, para lo que es posible el uso de varias tecnologías \cite{COMP}.
+Todos los algoritmos geométricos mencionados necesitan un soporte físico para determinar las variables posicionales del objetivo que requieren, para lo que es posible el uso de varias tecnologías, como se recoge en \cite{COMP}, de donde procede toda la información de esta sección.
 
 \subsubsection{Sonido}
 
@@ -343,7 +343,7 @@ Su atractivo principal es, como en otras tecnologías, el aprovechamiento de las
 Aunque también es posible su uso con TOA y AOA, su uso principal se restringe a técnicas de \textit{fingerprinting}, ya que habitualmente los puntos de acceso Wi-Fi usados para la conexión a internet no suelen superar la unidad por planta o edificio.
 
 Esta escasez de balizas es la principal desventaja: en su uso original un solo emisor puede dar servicio a multitud de dispositivos en una planta o incluso un edificio, por lo que lo habitual será encontrar numerosos obstáculos entre emisor y objetivo.
-Colocar más balizas para mitigar esto no solo es caro, sino que puede también añadir interferencias entre las señales teniendo en cuenta que los canales disponibles tienen un ancho de banda bajo.
+Colocar más balizas puede añadir interferencias entre las señales teniendo en cuenta que los canales disponibles tienen un ancho de banda bajo.
 
 Además, el uso extendido de esta tecnología inalámbrica hace que su espectro esté ya, en algunas ocasiones, saturado.
 Su precisión en ambientes ideales está en torno al metro, así que podría ser una buena opción en entornos abiertos o con pocas redes que puedan causar interferencias.
@@ -355,7 +355,7 @@ En el caso del Bluetooth nos encontramos de nuevo con una tecnología con una gr
 Entre las distintas generaciones se encuentra un protocolo llamado Bluetooth Low Energy (BLE) centrado en obtener un funcionamiento con el mínimo gasto energético posible, lo que lo hace idóneo para usar como sistema para localización como el que se trata en este trabajo.
 
 Técnicamente comparte el mismo rango de frecuencias con el Wi-Fi y las técnicas de posicionamiento son en general parecidas, aprovechando el decaimiento de la señal con técnicas de \textit{fingerprinting}.
-Pero a diferencia del Wi-Fi, los emisores BLE son mucho más baratos, por lo que la colocación de un número mayor de balizas sí es viable en este caso, lo que abre la puerta al uso de algoritmos de multiliteración.
+Pero a diferencia del Wi-Fi, la baja energía de los emisores BLE permiten la colocación de un número mayor de balizas, lo que abre la puerta al uso de algoritmos de multiliteración.
 
 Los mejores resultados sobre esta tecnología arrojan una precisión entre 1 y 3 metros, aunque estos resultados dependen en gran medida del número de balizas empleadas.
 
@@ -417,7 +417,7 @@ Aun así, es habitual el uso de técnicas de detección y evasión (DAA), en las
 
 \subsubsection{Pulsos de UWB}
 
-En el diseño de sistemas de UWB la elección de la forma del pulso es crucial, ya que determina la respuesta en frecuencias como se muestra en la figura \ref{fig:Pulsos}.
+En el diseño de sistemas de UWB la elección de la forma del pulso es crucial, ya que determina la respuesta en frecuencias como se muestra en la Figura~\ref{fig:Pulsos}.
 Los pulsos mayoritariamente tienen perfiles gaussianos, aunque con distintas características \cite{Du}.
 
 La primera opción es el uso de una forma gaussiana clásica
@@ -526,32 +526,85 @@ Con la adición de ruido blanco gaussiano y teniendo en cuenta las técnicas geo
 Con el fin de automatizar la toma de medidas para hacerla lo más eficiente posible se usó un robot móvil capaz de desplazarse mediante navegación autónoma en un entorno conocido.
 
 El elegido en este caso fue el robot TurtleBot 2, un robot con fines educativos y de investigación capaz de desplazarse y orientarse con total libertad en superficies llanas, como era el caso en el que nos encontrábamos.
+En la Figura~\ref{fig:robot} se puede ver el robot durante una de las tomas de medidas.
 
-\textbf{El TurtleBot funciona con ROS --Robot Operating System, en inglés--, un entorno de trabajo enfocado a los sistemas robóticos encargado del soporte para todos los dispositivos hardware del robot como motores, encoders o cámaras. 
-Cuenta con diversas librerías para distintos casos de uso, entre las que se encuentra la navegación en un entorno controlado como la que se da en el caso de este trabajo.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{pic/robot_fisica.jpg}
+    \caption{Turtlebot en una de las tomas de medidas.}
+    \label{fig:robot}
+\end{figure}
+
+El TurtleBot funciona con ROS --Robot Operating System, en inglés--, un entorno de trabajo enfocado a los sistemas robóticos encargado del soporte para todos los dispositivos hardware del robot como motores, encoders o cámaras. 
+Cuenta con diversas librerías para distintos casos de uso, entre las que se encuentra la navegación en un entorno controlado como la que se da en el caso de este trabajo.
 
 Dentro de los paquetes disponibles, el usado en el desarrollo del trabajo es el encargado de la navegación del robot, que permite desplazar al robot a cualquier punto del entorno.
 
 Es posible acoplar al robot un sistema de visión que, mediante luz estructura, permite obtener un mapa de profundidad, llamado Kinect, desarrollado en primera instancia para el uso en videojuegos pero con uso también en labores de investigación al permitir el posicionamiento de objetos y paredes respecto al dicho sistema, de tal manera que permite evitar obstáculos dinámicos en el caso de que interpongan en su camino.
 
-Con esta herramienta la librería de navegación permite un mapeado autónomo tomando como referencias los datos de odometría que proporcionan los motores propulsores del robot para determinar las dimensiones del entorno.
+La funcionalidad de navegación aprovecha estos sensores realizando una fusión de sus resultados con los datos de movimiento de los motores que realizan el movimiento de tal forma que es posible corregir cualquier error en casos donde el movimiento de las ruedas no se traslade directamente en movimiento del robot, como puede ocurrir al rotar sobre sí mismo.
+
+Para conseguir el posicionamiento en el mapa el paquete de navegación construye un \textit{planner} global sobre el que es posible determinar las rutas a seguir por el robot para llegar a un punto dado sorteando obstáculos y paredes.
+Junto a él trabaja un \textit{planner} local, en el que gracias a los sensores incorporados se evalúan de forma continua los alrededores del robot.
+Así, es posible conseguir de forma continua una evaluación de los posibles obstáculos que no se encuentran en el mapa del planner global, para lo que se construye un mapa de costes con el fin de abortar el movimiento en el caso de que sea imposible alcanzar el punto objetivo.
+
+Con la información actualizada del \textit{planner} local, el \textit{planner} global es capaz de proporcionar la posición del robot en el mapa.
+Es posible observar un esquema del funcionamiento de estos sistemas en la Figura~\ref{fig:move_base}.
+
+\begin{figure}[H]
+    \centering
+    \def\svgwidth{0.8\linewidth}
+    \input{./fig/navigation.pdf_tex}
+	\caption{Esquema del funcionamiento del paquete de navegación de ROS.}
+    \label{fig:move_base}
+\end{figure}
+
+Con esta herramienta la librería de navegación permite un mapeado autónomo tomando como referencia los datos de odometría que proporcionan los motores propulsores del robot para determinar las dimensiones del entorno.
 
 En el caso de disponer de antemano de dichas dimensiones es posible proporcionar un mapa al sistema de navegación y evitar el paso de reconocimiento del entorno.
-Esto no solo ahorra el tiempo, si no que además minimiza las posibles discrepancias entre los datos de odometría y los desplazamientos reales del robot al realizar el mapeado de forma autónoma.
+Esto no solo ahorra tiempo, sino que además minimiza las posibles discrepancias entre los datos de odometría y los desplazamientos reales del robot al realizar el mapeado de forma autónoma.
 
 La opción de realizar un mapa previo fue la elegida en este caso, ya que el robot cuenta con rutinas para el reposicionamiento en el mapa en dicho caso.
 Así, a partir de los límites establecidos y comprobados de forma manual, las posibles discrepancias en la odometría del robot se ven continuamente compensadas y corregidas.
+
+Para facilitar el uso de ROS existe la posibilidad de usar el simulador Stage, capaz de crear un mundo virtual a partir de un mapa en dos dimensiones en el que colocar el Turtlebot y simular su funcionamiento de forma total sin tener acceso al robot de forma física.
+Es posible observar su interfaz en la Figura~\ref{fig:stage_rviz}.
+
+Además, ROS también permite el uso de una herramienta de visualización de la posición del robot en el mapa y de todos los sensores que incorpora llamada \textit{rviz}.
+Aunque es compatible con Stage, sus funcionalidades brillan al usar el robot en entornos reales, donde es posible comprobar de forma continua que su posicionamiento es correcto y que sus sensores funcionan como es debido.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{pic/Stage-rviz.png}
+    \caption{Captura del simulador Stage (a la izquierda) y la herramienta de visualización \textit{rviz} (a la derecha).}
+    \label{fig:stage_rviz}
+\end{figure}
 
 \subsection{Sensores UWB}
 
 Aunque el uso de UWB para el posicionamiento no está, al escribir este trabajo, utilizado de forma masiva, existen varias implementaciones comerciales que hacen uso de las técnicas geométricas mencionadas en secciones anteriores.
 A pesar de que el uso de sensores propios es habitual, la adaptación de teléfonos móviles para la estimación de la posición también ha sido explorada por empresas como BeSpoon, a la espera de una implantación mayoritaria de hardware compatible en el diseño de estos dispositivos.
 
-Los sensores utilizados han sido los pertenecientes al kit MDEK1001 ofertado por la empresa DecaWave, llamados DWM1001 de forma individual.
+Los sensores utilizados han sido los pertenecientes al kit MDEK1001 ofertado por la empresa DecaWave.
 Se trata de un sistema que ofrece, con una configuración mínima, la posibilidad de usar cualquiera de los componentes como baliza u objetivo.
 Además, implementa un algoritmo de posicionamiento con al menos tres balizas de, según el fabricante, hasta 10cm de precisión con visión directa \cite{Decawave}.
 
+Este kit está formado por los módulos de desarrollo DW1001, encapsulados en una carcasa de plástico que permite colocarlos encima de una superficie plana o su colocación en paredes, como se puede observar en la Figura~\ref{fig:sensor_UWB}.
+Permiten obtener una alimentación a partir de baterías, como fue el uso en este trabajo para las balizas, o a partir de alimentación a través del puerto USB utilizado para la recolección de datos.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{pic/sensor_abierto.jpg}
+    \caption{Módulo de sensor UWB DWM1001 dentro de la carcasa que lo contiene.}
+    \label{fig:sensor_UWB}
+\end{figure}
+
 Algunas alternativas comerciales cuentan con antenas direccionales que permiten usar técnicas de AOA, pero no es el caso del kit utilizado que solo permite el posicionamiento con TOA y TDOA.
+
+Los sensores, además de la comunicación por UWB, también permiten la comunicación por Bluetooth para su configuración como objetivos o balizas y en este último caso, la posición que ocupan.
+También permite configurar estas posiciones de las balizas de forma automática, aunque requiere que todas se coloquen en el mismo plano y en general una configuración manual proporcionará unos mejores resultados.
+
+Para la comunicación por UWB los sensores utilizan el canal 5, con frecuencia central de $6,5$GHz y ancho de banda de $499.2$MHz que le permiten una tasa de datos de $6.81$Mbps \cite{Decawave}.
 
 El inicio de comercialización de dicho kit se remonta a 2017, por lo que no existe una amplia bibliografía sobre su uso en entornos reales más allá de los datos proporcionados por el fabricante.
 
