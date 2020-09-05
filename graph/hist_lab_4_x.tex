@@ -1,11 +1,11 @@
 \begin{tikzpicture}
     \begin{axis}[small,ymin=0,xlabel={[cm]},]
     \addplot [
-        hist={bins=30,data=x},
+        hist={density,bins=10},
     fill=black!50,]
     table[y index=0] {data/4sens_lab_full.txt};
     % table[y index=0] {data/4sens_lab.txt};
 
-    % \addplot[black, ultra thick, dashed, domain=-80:20]{(1/19.85)*exp(-0.5*((x+7.89)/19.85)^2)};
+    \addplot[black, ultra thick, dashed, domain=-80:20]{1/(19.85*2.5)*exp(-0.5*((x+7.89)/19.85)^2)};
 \end{axis}
 \end{tikzpicture}

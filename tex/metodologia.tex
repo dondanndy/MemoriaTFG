@@ -7,13 +7,12 @@ El segundo escenario fue la segunda planta del edificio B de la Facultad de Fís
 Antes de proceder a la toma de medidas en las dos localizaciones escogidas se escribió el código responsable de los nodos de ROS que desplazaban al robot y recogían los datos de posicionamiento con la ayuda del simulador Stage.
 Todo este código y su estructura figura en el Apéndice 2.
 
-Además de el código del nodo, también es necesario construir el mapa sobre el que la navegación del robot construye el planner global y así conocer la posición y el movimiento del robot.
+Además del código del nodo, también fue necesario diseñar el mapa sobre el que el paquete de navegación de ROS construye el \textit{planner} global para conocer la posición y controlar el movimiento del robot.
 En el caso del laboratorio, dicho mapa estaba ya construido al ser localización habitual de investigación con el Turtlebot.
 
 No fue así en para el edificio de Física.
 En una primera instancia se recurrió a los planos de construcción, a la espera de posibles correcciones con la obtención de las dimensiones reales de la planta con un medidor láser.
-
-Finalmente estas correcciones fueron necesarias, ya que los planos no respetaban completamente las medidas reales de los pasillos de la planta que debía recorrer el robot.
+Finalmente estas correcciones fueron necesarias, ya que dichos planos no respetaban completamente las medidas reales de los pasillos de la planta que debía recorrer el robot.
 
 \begin{figure}[H]
   \centering

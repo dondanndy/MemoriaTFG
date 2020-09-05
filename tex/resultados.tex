@@ -1,6 +1,6 @@
 Tal y como viene recogido en las sección anterior, en la toma de medidas se recabaron datos desde dos fuentes: el posicionamiento local del robot y los cálculos del kit de sensores de UWB.
 
-Para el análisis de los resultados se ha considerar los datos obtenidos por el posicionamiento local del robot como \textit{ground truth}, es decir, como la posición verdadera del sensor considerado como objetivo, que está colocado encima del robot.
+Para el análisis de los resultados se han considerado a los datos obtenidos por el posicionamiento local del robot como \textit{ground truth}, es decir, como la posición verdadera del sensor establecido como objetivo, que está colocado encima del robot.
 A partir de esta consideración, es posible definir el error en la posición para cada uno de los ejes cartesianos como
 \begin{equation}\label{eq:Diff_eje}
     \text{Error eje} = \text{Valor robot} - \text{Valor sensores}
@@ -19,18 +19,18 @@ Además de las diferencias en cada eje se evaluará la discrepancia en la posici
 Así, las componentes de dicho vector son las definidas en \eqref{eq:Diff_eje} y su módulo, que será interpretado como el error en posición se define como
 
 \begin{equation}\label{eq:vec_pos}
-    \text{Error en possición} = \sqrt{(\text{Error } x)^2 + (\text{Error } y)^2}
+    \text{Error en posición} = \sqrt{(\text{Error } x)^2 + (\text{Error } y)^2}
 \end{equation}
 
 A la hora de interpretar los resultados a partir de la toma de medidas y con el tratamiento especificado cabe recordar que en \eqref{eq:Diff_eje} se incluyen dos fuentes de error, por un lado el posicionamiento local del robot y por otro el posicionamiento por triliteración de los sensores de UWB.
 
-La evaluación de la bondad de los cálculos de los sensores, teniendo en cuenta la posibilidad de tomar tantas medidas como sea posible, es directa, dando en todos los casos una distribución gaussiana, como era de esperar y como se podía ver en la Figura~\ref{fig:datos_sensor}; aun así, según los datos proporcionados por el fabricante y contrastados en trabajos previos nos da unos errores de como mínimo 10cm.
+La evaluación de la bondad del posicionamiento de los sensores, teniendo en cuenta la posibilidad de tomar con ellos tantas medidas como sea posible, es directa, dando en todos los casos una distribución gaussiana, como era de esperar y como se podía ver en la Figura~\ref{fig:datos_sensor}; aun así, según los datos proporcionados por el fabricante y contrastados en trabajos previos nos da unos errores de como mínimo 10cm.
 
 En el caso del robot los sistemas de posicionamiento local propios, basados en la fusión de datos de odometría y de posicionamiento de objetos arrojan una precisión de 10cm con un perfil también normal \cite{POSRobot}.
 % Sin embargo, dependen también de la presencia de paredes u objetos contra los que comparar los datos de odometría que proporcionan los motores lo mueven.
 
 La adición de ambas fuentes de error, siguiendo el teorema del límite central, nos dará una distribución que tenderá con un número creciente de medias hacia otra distribución gaussiana con el error total en la posición del robot.
-Teniendo en cuenta que los errores de posicionamiento no son absolutos, será posible encontrar casos puntuales en los que la adición de ambas fuentes de error proporcione un error total con un valor menor que cada uno de los por separado, compensándose entre sí.
+Teniendo en cuenta que los errores de posicionamiento no son absolutos, será posible encontrar casos puntuales en los que la adición de ambas fuentes de error proporcione un error total con un valor menor que cada uno de los errores por separado, compensándose entre sí.
 
 La toma de numerosas medidas con distintas rutas trata de minimizar este hecho, de tal forma que, de media, es razonable esperar un error en el posicionamiento en torno a los 20cm, en el caso de \eqref{eq:vec_pos}.
 
@@ -43,9 +43,9 @@ Los datos con cada una ellas por separados se encuentran en el Apéndice 1.
 
 \subsubsection{4 balizas}
 
-Con la configuración de cuatro balizas definida en la Figura~\ref{fig:lab_4sens} se obtuvieron los datos recopilados en las Tablas \ref{tab:media_fisica_4_vertical} para la trayectoria vertical, \ref{tab:media_fisica_4_espiral} para la trayectoria en espiral y \ref{tab:media_fisica_4_aleatoria} para la trayectoria aleatoria.
+Con la configuración de cuatro balizas definida en la Figura~\ref{fig:lab_4sens} se obtuvieron los datos recopilados en las Tablas \ref{tab:media_lab_4_vertical} para la trayectoria vertical, \ref{tab:media_lab_4_espiral} para la trayectoria en espiral y \ref{tab:media_lab_4_aleatoria} para la trayectoria aleatoria.
 
-Los datos acumulados de las tres trayectorias están recogidos en la Tabla \ref{tab:media_fisica_4_total}, y representados en Figura~\ref{fig:res_lab}
+Los datos acumulados de las tres trayectorias están recogidos en la Tabla \ref{tab:media_lab_4_total}, y representados en Figura~\ref{fig:res_lab}
 % \footnote{La presentación de los resultados expuestos a lo largo de la sección se han obtenido por interpolación a partir de las referencias definidas por los valores experimentales los puntos medidos, separados por un metro en el caso del laboratorio e indicados con el valor obtenido en cada cada uno de ellos sobre el lugar donde se obtuvo. La interpolación fue realizada usando splines bicúbicos, de tal manera que los valores en los puntos de referencia no han sido alterados.
 % Entre paréntesis se indica la desviación estándar de los valores obtenidos en cada punto.}
 \begin{figure}[H]
@@ -56,7 +56,7 @@ Los datos acumulados de las tres trayectorias están recogidos en la Tabla \ref{
 \end{figure}
 
 Es posible observar un valor muy alto en la discrepancia en en el eje $x$ en el punto 34 --definido en la Figura~\ref{fig:puntos}--.
-Teniendo en cuenta que en los puntos adyacentes no ocurre, es posible achacar esta alta discrepancia a puras fluctuaciones estadísticas, más teniendo en cuenta que no se repite en más puntos, o a una falta de visión directa entre objetivo y balizas.
+Teniendo en cuenta que en los puntos adyacentes no ocurre, es posible achacar esta alta discrepancia a puras fluctuaciones estadísticas o a una falta de visión directa entre objetivo y balizas, teniendo en cuenta que no se repite en más puntos.
 
 Para tratar de comprobar el comportamiento general de la combinación de sensores y robot más allá de puntos con valores especialmente altos o bajos se recoge la Tabla~\ref{tab:resumen_lab_4} con los valores medios y dispersión del error a lo largo de cada uno de los ejes y del error en el posicionamiento en el caso de uso de 4 balizas.
 
@@ -90,7 +90,7 @@ Es posible comprobar este hecho con un histograma de los valores obtenidos en la
       \caption{Eje $x$}
       \label{fig:histogramas_lab_4sens_x}
     \end{subfigure}
-    ~~~~~
+    ~~~~~~~~~
     \begin{subfigure}[b]{.3\textwidth}
       \centering
       \input{./graph/hist_lab_4_y.tex}
@@ -106,11 +106,11 @@ Es posible comprobar este hecho con un histograma de los valores obtenidos en la
         \caption{Posición}
         \label{fig:histogramas_lab_4sens_pos}
       \end{subfigure}
-    \caption{Histogramas con todas las medidas realizadas con 4 balizas.}
+    \caption{Histogramas con todas las medidas realizadas con 4 balizas, normalizados.}
     \label{fig:histogramas_lab_4sens}
   \end{figure}
 
-En los histogramas es claramente apreciable la naturaleza gaussiana de los valores obtenidos, por lo que es posible ajustar los valores a distribución de probabilidad normales y permite utilizar la media y la desviación estándar como parámetros principales para analizar el rendimiento del sistema establecido entre robot y sensores, aunque un volumen mayor de medidas hubiese resultado en mejores ajustes.
+En los histogramas es claramente apreciable la naturaleza gaussiana de los valores obtenidos, por lo que es posible ajustar los valores a distribuciones de probabilidad normales y permite utilizar la media y la desviación estándar como parámetros principales para analizar el rendimiento del sistema establecido entre robot y sensores, aunque un volumen mayor de medidas hubiese resultado en mejores ajustes.
 
 En el caso del error en la posición, fruto de la combinación de distribuciones gaussiana de acuerdo a \eqref{eq:vec_pos} la parametrización usual es la de una función gamma \cite{jimenez}.
 
@@ -121,9 +121,9 @@ En el caso del error en la posición, fruto de la combinación de distribuciones
 % En el caso en el que estos ángulos sean muy agudos --cosa que ocurre en cada uno de los ejes donde la desviación estándar crece-- el posicionamiento por triliteración comienza a presentar un rendimiento muy pobre.
 
 \subsubsection{6 balizas}
-Tras la colocación de dos balizas adicionales a lo largo de los extremos en el eje $x$ tal y como se indicaba en la Figura~\ref{fig:lab_6sens} se obtuvieron los siguientes resultados recogidos en la Figura~\ref{fig:res_lab} y en la Tabla~\ref{tab:media_fisica_6_total}.
+Tras la colocación de dos balizas adicionales a lo largo de los extremos en el eje $x$ tal y como se indicaba en la Figura~\ref{fig:lab_6sens} se obtuvieron los siguientes resultados recogidos en la Figura~\ref{fig:res_lab} y en la Tabla~\ref{tab:media_lab_6_total}.
 
-Al igual que en el caso de 4 balizas, los datos recopilados se encuentran en las Tablas \ref{tab:media_fisica_6_vertical} para la trayectoria vertical, \ref{tab:media_fisica_6_espiral} para la trayectoria en espiral y \ref{tab:media_fisica_6_aleatoria} para la trayectoria aleatoria.
+Al igual que en el caso de 4 balizas, los datos recopilados se encuentran en las Tablas \ref{tab:media_lab_6_vertical} para la trayectoria vertical, \ref{tab:media_lab_6_espiral} para la trayectoria en espiral y \ref{tab:media_lab_6_aleatoria} para la trayectoria aleatoria.
 
 % Una disposición que evite la formación de ángulos demasiado agudos entre las balizas y el objetivo hará que se pueda obtener un posicionamiento más estable y preciso, como la que se propuso en esta sección con 6 sensores, aunque el kit utilizado solo use las cuatro más cercanas.
 \begin{figure}[H]
@@ -197,7 +197,7 @@ Es posible que un mayor número de balizas proporcione mejores resultados, espec
 
 \subsection{Edificio de Física}
 
-Una vez obtenido los resultados en el laboratorio se repitió la toma de medidas de la misma forma en el edificio B de la Facultad de Física, en un entorno con obstáculos en los que las tomas de medidas se produjeron en todo momento en zonas cercanas a paredes y con un mismo recorrido al no tener opción por la disposición de la planta a colocar el robot en más lugares.
+Una vez obtenido los resultados en el laboratorio se repitió la toma de medidas de la misma forma en el edificio B de la Facultad de Física, en un entorno con obstáculos en los que las tomas de medidas se produjeron en todo momento en zonas cercanas a paredes y con un mismo recorrido al no tener opción por la disposición de la planta a colocar el robot en otros lugares.
 
 Así, la presentación de los siguientes datos corresponden a tres medidas de la misma trayectoria en cada caso.
 
@@ -206,7 +206,7 @@ Esto se ve reflejado en la presentación de los resultados, el los que ahora no 
 
 \subsubsection{4 balizas}
 
-Colocando 4 sensores como balizas con la disposición indicada en la Figura~\ref{fig:sensores_fisica_4} se obtuvieron los resultados recogidos en la Figura~\ref{fig:res_fisica_4}.
+Colocando 4 sensores como balizas con la disposición indicada en la Figura~\ref{fig:sensores_fisica_4} se obtuvieron los resultados representados en la Figura~\ref{fig:res_fisica_4} y recogidos en la Tabla~\ref{tab:media_fisica_4_total}.
 \begin{figure}[H]
     \centering
     \input{graph/res/fisica_4sensores.pgf}
@@ -238,7 +238,7 @@ Así, los resultados obtenidos aquí coinciden con las conclusiones extraídas d
 
 \subsubsection{6 balizas}
 
-Añadiendo dos balizas como se indicaba en \ref{fig:sensores_fisica_6} se obtuvieron los resultados que se recogen en la Figura~\ref{fig:res_fisica_6}.
+Añadiendo dos balizas como se indicaba en \ref{fig:sensores_fisica_6} se obtuvieron los resultados que se han representado en la Figura~\ref{fig:res_fisica_6} y recogidos en la Tabla~\ref{tab:media_fisica_6_total}.
 \begin{figure}[H]
   \centering
   \input{graph/res/fisica_6sensores.pgf}
@@ -274,7 +274,7 @@ A pesar de las escasas mejoras en los puntos mencionados anteriormente, los valo
 
 \subsubsection{8 balizas}
 
-Por último, se añadieron otros dos sensores para tener 8 balizas tal y como se muestra en la Figura~\ref{fig:sensores_fisica_8}, tras lo que se obtuvieron los resultados representados en la Figura~\ref{fig:res_fisica_8}.
+Por último, se añadieron otros dos sensores para tener 8 balizas tal y como se muestra en la Figura~\ref{fig:sensores_fisica_8}, tras lo que se obtuvieron los resultados representados en la Figura~\ref{fig:res_fisica_8} y recogidos en la Tabla~\ref{tab:media_fisica_8_total}.
 \begin{figure}[H]
     \centering
     \input{graph/res/fisica_8sensores.pgf}

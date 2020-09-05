@@ -1,6 +1,6 @@
 \subsection{Técnicas de estimación de la posición}
 
-Existen dos alternativas para estimar la posición de un objetivo a partir de la posición conocida de un cierto número de balizas con coordenadas conocidas: la primera, denominada \textit{fingerprinting} se basa en la obtención de un modelo de posicionamiento a partir de la medición de la potencia de las balizas; la segunda, obtiene las estimaciones a partir de técnicas geométricas \cite{MAIN}.
+Existen dos alternativas para estimar la posición de un objetivo a partir de la posición conocida de un cierto número de balizas con coordenadas conocidas: la primera, denominada \textit{fingerprinting}, se basa en la obtención de un modelo de posicionamiento a partir de la medición de la potencia de las balizas; la segunda, obtiene las estimaciones a partir de técnicas geométricas \cite{MAIN}.
 
 \subsubsection{\textit{Fingerprinting}}
 
@@ -16,14 +16,14 @@ Requieren, de forma general, una capacidad computacional mayor a las alternativa
 
 La multiliteración -- también llamada \textit{triliteración} en el caso de usar tres puntos de referencia -- es una técnica para conocer la posición de un objetivo con argumentos geométricos.
 
-Se basa en la búsqueda de la intersección de las áreas de distancia conocida a partir de la posición de varias balizas.
+Se basa en la búsqueda de la intersección de ciertas áreas a partir de la posición de varias balizas con posición conocida.
 Estas áreas están definidas por distancias o ángulos a las balizas de referencia, valor obtenible con distintas técnicas.
 
 En general, la posición del objetivo vendrá dado, en $n$ dimensiones, por
 \begin{equation}\label{eq:geom}
     \vb{r} = \vb{f}(x_1, x_2, \ldots, x_n) + \vb{n}
 \end{equation}
-donde $\vb{f}$ será la función característica de cada algoritmo y $\vb{n}$ un vector con el ruido de la señal, con un valor medio nulo.
+donde $\vb{f}$ será la función característica de cada algoritmo y $\vb{n}$ un vector que representa el ruido de la señal, con un valor medio nulo.
 
 % \subsubsubsection{Límites teóricos}
 
@@ -32,7 +32,7 @@ donde $\vb{f}$ será la función característica de cada algoritmo y $\vb{n}$ un
 
 Este ruido está relacionado con la generación y el traslado de la señal desde la baliza hasta el objetivo y tiene un carácter aleatorio, por lo que su caracterización habitual es la de ruido blanco gaussiano, con valor medio cero.
 
-Esta caracterización, unida al muestreo discreto de la señal por parte de los dispositivos electrónicos resulta en un límite en la precisión del posicionamiento, incluso en los casos más ideales.
+Esta caracterización, unida al muestreo discreto de la señal por parte de los dispositivos electrónicos, resulta en un límite en la precisión del posicionamiento, incluso en los casos más ideales.
 
 El límite más usual viene dado por la cota inferior de Cramer-Rao (CRLB), definido como la traza de la matriz de Fisher inversa.
 La matriz de Fisher se construye, en el caso de la parametrización del ruido con características gaussianas, como \cite{Xbook}
@@ -73,7 +73,7 @@ Así, la varianza de cada uno de los parámetros a estimar vendrá dada como
 \subsubsubsection{Tiempo de llegada (TOA)}
 
 El primer algoritmo considera una velocidad de transmisión conocida y una línea de visión directa entre las balizas y el objetivo.
-Teniendo en cuenta que el medio de propagación será aire, la velocidad de la señal será la velocidad de la luz en el caso de ondas electromagnéticas.
+Teniendo en cuenta que el medio de propagación será el aire, la velocidad de la señal será la velocidad de la luz en el caso de ondas electromagnéticas.
 Esta velocidad no tendrá variaciones significativas al cambiar la zona de interés, por lo que será válida para prácticamente cualquier escenario.
 
 Denotando al objetivo como OBJ y con tres balizas llamadas $B_i$ con $i=1,2,3$, la distancia recorrida por cada señal hasta el objetivo será \footnote{Durante todo el desarrollo de la teoría de posicionamiento en esta sección se supondrá un sistema bidimensional. Esto no puede ser así en la implementación \textit{real}, pero teniendo en cuenta que en el posicionamiento local se trata con sistemas euclídeos la adición de la tercera componente en todos los cálculos es trivial.}
@@ -88,7 +88,7 @@ Así, la función característica de este algoritmo será, en dos dimensiones
 \begin{equation}
     f_i(x, y) = \sqrt{(x_i - x)^2 + (y_i - y)^2}
 \end{equation}
-para cada baliza.
+para cada baliza, definiendo una circunferencia de radio $d_i$ como se muestra en la Figura~\ref{fig:TOA}.
 
 \begin{figure}[H]
     \centering
@@ -138,23 +138,27 @@ Por ello en dichas situaciones es habitual el uso de la cota inferior de Ziv-Zak
 Para eliminar la sincronización de relojes entre las balizas y el objetivo es posible usar también la diferencia temporal entre las señales de las balizas, teniendo así independencia en el sistema del objetivo.
 Aunque se consiga la independencia del reloj del objetivo, esta configuración sigue requiriendo que los relojes de las balizas estén sincronizados entre sí.
 
-Así, la diferencia entre las distancias de las señales de dos balizas, teniendo en cuenta los tiempos en la llegada de la señal de dos balizas será
+Así, la diferencia entre las distancias de las señales de dos balizas, teniendo en cuenta los tiempos en la llegada de la señal de dichas balizas será
 \begin{equation}\label{eq:TDOA}
         d_{ij} = c(t_i - t_j) = c \left[  (\tau_i + t_0) - (\tau_j + t_0)\right] = c(\tau_i - \tau_j)
 \end{equation}
 válida para $i=1,2,3$ y $j=1,2,3$ con $i \neq j$.
 Así, la función característica de este algoritmo será
-\begin{equation}
+\begin{equation}\label{eq:funcion_TDOA}
     f_i(x,y) = \sqrt{(x_i - x)^2 + (y_i - y)^2} - \sqrt{(x_j - x)^2 + (y_j - y)^2}
 \end{equation}
 para cada baliza $i$ respecto de cualquiera $j$ de las otras.
 
 \begin{figure}[H]
     \centering
-    \def\svgwidth{0.6\linewidth}
+    \def\svgwidth{0.55\linewidth}
 	\input{./fig/TDOA.pdf_tex}
-	\caption{Posicionamiento por diferencia tiempo de vuelo (TDOA)}
+    \caption{Posicionamiento por diferencia tiempo de vuelo (TDOA)}
+    \label{fig:TDOA}
 \end{figure}
+
+La función característica \eqref{eq:funcion_TDOA} hace que se definan parábolas en torno a cada una de las balizas, como se muestra de forma cualitativa en la Figura~\ref{fig:TDOA}.
+
 Así, tomando la baliza 1 como referencia tenemos que las coordenadas del objetivo vienen dadas por el sistema de ecuaciones
 \begin{equation}
     \begin{cases}
@@ -175,7 +179,7 @@ Para evitar problemas con la sincronización de los relojes necesaria en las té
 donde $p(r_0)$ y $p(r)$ son la intensidad de la señal en el origen y el objetivo respectivamente y $n$ el exponente de atenuación de la señal.
 
 Esta técnica es muy susceptible ante el ruido ambiental y las posibles interferencias que puedan ocurrir entre las señales de distintas balizas o de fuentes externas.
-La disposición geométrica es similar a la vista en la técnica de tiempo de llegada (Fig \ref{fig:TOA}), donde a partir de una medición de la señal de una baliza es posible definir una circunferencia de centro en dicha baliza y radio dado por \eqref{eq:RSSI}.
+La disposición geométrica es similar a la vista en la técnica de tiempo de llegada (Figura~\ref{fig:TOA}), donde a partir de una medición de la señal de una baliza es posible definir una circunferencia de centro en dicha baliza y radio dado por \eqref{eq:RSSI}.
 
 A diferencia de los casos de TOA y TDOA el CRLB en esta técnica es independiente del ancho de banda de la señal, dado por \cite{MAIN}
 \begin{equation}\label{eq:CRLB_RSSI}
@@ -187,7 +191,7 @@ La independencia de las cotas inferiores del ancho de banda de la señal hacen q
 
 \subsubsubsection{Ángulo de llegada (AOA)}
 
-Otra opción para evitar la sincronización de los relojes entre las balizas consiste en usar el ángulo de incidencia de la señal en el objetivo, de tal forma que, para una baliza $B_i$ dicho el objetivo se encuentra en la posición
+Otra opción para evitar la sincronización de los relojes entre las balizas consiste en usar el ángulo de incidencia de la señal en el objetivo como se muestra en la Figura~\ref{fig:AOA}, de tal forma que, para una baliza $B_i$ dicho el objetivo se encuentra en la posición
 \begin{equation}
     \label{eq:AOA}
     \begin{aligned}
@@ -395,7 +399,7 @@ El tiempo de transmisión de un pulso viene dado por\cite{MAIN}
 donde $N_d$, $N_{mP}$ y $N_{0}$ indican los tamaños de datos, tasa máxima y \textit{overhead} respectivamente;
 mientras que $T_b$ y $T_{pr}$ indican la duración y el tiempo de propagación de cada bit, respectivamente.
 
-Si el tiempo de propagación es inversamente proporcional a la tasa de datos, muy amplia en el caso del UWB, el tiempo de propagación será por tanto muy bajo, lo que no solo evita las interferencias sino que permite una resolución temporal muy alta.
+Si el tiempo de propagación es inversamente proporcional a la tasa de datos, muy amplia en el caso del UWB, dicho tiempo de propagación será por tanto muy bajo, lo que no solo evita las interferencias sino que permite una resolución temporal muy alta.
 
 La tasa de datos viene dada por capacidad de un canal, dada en bits/sec como\cite{MAIN}
 \begin{equation}
@@ -525,7 +529,7 @@ Con la adición de ruido blanco gaussiano y teniendo en cuenta las técnicas geo
 
 Con el fin de automatizar la toma de medidas para hacerla lo más eficiente posible se usó un robot móvil capaz de desplazarse mediante navegación autónoma en un entorno conocido.
 
-El elegido en este caso fue el robot TurtleBot 2, un robot con fines educativos y de investigación capaz de desplazarse y orientarse con total libertad en superficies llanas, como era el caso en el que nos encontrábamos.
+El elegido en este caso fue el robot TurtleBot 2, un robot con fines educativos y de investigación capaz de desplazarse y orientarse con total libertad en superficies llanas, como eran los en el que se desarrolló este trabajo.
 En la Figura~\ref{fig:robot} se puede ver el robot durante una de las tomas de medidas.
 
 \begin{figure}[H]
@@ -535,12 +539,13 @@ En la Figura~\ref{fig:robot} se puede ver el robot durante una de las tomas de m
     \label{fig:robot}
 \end{figure}
 
-El TurtleBot funciona con ROS --Robot Operating System, en inglés--, un entorno de trabajo enfocado a los sistemas robóticos encargado del soporte para todos los dispositivos hardware del robot como motores, encoders o cámaras. 
+El TurtleBot funciona con ROS --\textit{Robot Operating System}, en inglés--, un entorno de trabajo enfocado a los sistemas robóticos encargado del soporte para todos los dispositivos hardware del robot como motores, encoders o cámaras. 
 Cuenta con diversas librerías para distintos casos de uso, entre las que se encuentra la navegación en un entorno controlado como la que se da en el caso de este trabajo.
 
-Dentro de los paquetes disponibles, el usado en el desarrollo del trabajo es el encargado de la navegación del robot, que permite desplazar al robot a cualquier punto del entorno.
+Dentro de los paquetes disponibles, el usado en el desarrollo del trabajo es el encargado de la navegación del robot, que permite desplazar al robot a cualquier punto del entorno de trabajo.
 
-Es posible acoplar al robot un sistema de visión que, mediante luz estructura, permite obtener un mapa de profundidad, llamado Kinect, desarrollado en primera instancia para el uso en videojuegos pero con uso también en labores de investigación al permitir el posicionamiento de objetos y paredes respecto al dicho sistema, de tal manera que permite evitar obstáculos dinámicos en el caso de que interpongan en su camino.
+Es posible acoplar al robot un sistema de visión llamado Kinect que, mediante luz, permite obtener un mapa de profundidad del entorno que lo rodea.
+Fue desarrollado en primera instancia para el uso en videojuegos pero su uso también se ha extendido a labores de investigación al permitir el posicionamiento de objetos y paredes, de tal manera que permite al robot evitar obstáculos dinámicos en el caso de que interpongan en su camino.
 
 La funcionalidad de navegación aprovecha estos sensores realizando una fusión de sus resultados con los datos de movimiento de los motores que realizan el movimiento de tal forma que es posible corregir cualquier error en casos donde el movimiento de las ruedas no se traslade directamente en movimiento del robot, como puede ocurrir al rotar sobre sí mismo.
 
@@ -590,7 +595,7 @@ Se trata de un sistema que ofrece, con una configuración mínima, la posibilida
 Además, implementa un algoritmo de posicionamiento con al menos tres balizas de, según el fabricante, hasta 10cm de precisión con visión directa \cite{Decawave}.
 
 Este kit está formado por los módulos de desarrollo DW1001, encapsulados en una carcasa de plástico que permite colocarlos encima de una superficie plana o su colocación en paredes, como se puede observar en la Figura~\ref{fig:sensor_UWB}.
-Permiten obtener una alimentación a partir de baterías, como fue el uso en este trabajo para las balizas, o a partir de alimentación a través del puerto USB utilizado para la recolección de datos.
+Permiten su uso con baterías, como fue el uso en este trabajo para las balizas, o a partir de alimentación a través del puerto USB utilizado para la recolección de datos.
 
 \begin{figure}[H]
     \centering
