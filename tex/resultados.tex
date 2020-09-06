@@ -203,15 +203,15 @@ Es posible que un mayor número de balizas proporcione mejores resultados, espec
 \newpage
 \subsection{Edificio de Física}
 
-Una vez obtenidos los resultados en el laboratorio se repitió la toma de medidas de la misma forma en el edificio B de la Facultad de Física, en un entorno con obstáculos y una mayor superficie a recorrer, características más cercanas a entornos reales en los que hacer uso de la tecnología de posicionamiento.L
-as tomas de medidas se produjeron en todo momento en zonas cercanas a paredes y con un mismo recorrido al no tener opción por la disposición de la planta a colocar el robot en otros lugares.
+Una vez obtenidos los resultados en el laboratorio se repitió la toma de medidas de la misma forma en el edificio B de la Facultad de Física, en un entorno con obstáculos y una mayor superficie a recorrer, características más cercanas a entornos reales en los que hacer uso de la tecnología de posicionamiento.
+Las medidas se produjeron en todo momento en zonas cercanas a paredes y con un mismo recorrido al no tener opción por la disposición de la planta a colocar el robot en otros lugares.
 
-Así, la presentación de los siguientes datos corresponden a tres medidas de la misma trayectoria en cada caso.
+Así, la presentación de los siguientes datos corresponden, en cada caso, a tres medidas de la misma trayectoria.
 
 Las medidas en este escenario se realizaron colocando el origen del sistema de referencia en una de las esquinas de la planta, ya que a diferencia del laboratorio, no era posible acceder al centro para establecer ahí dicho origen.
 Esto se ve reflejado en la presentación de los resultados, en los que ahora no aparecen coordenadas negativas.
 
-Debido a las características de este escenario es razonable esperar, en general, unos errores en la posición del robot mayores que los que se encontraron en el laboratorio, especialmente en los puntos donde no sea posible encontrar línas de visión directa entre los sensores.
+Debido a las características de este escenario es razonable esperar, en general, unos errores en la posición del robot mayores que los que se encontraron en el laboratorio, especialmente en los puntos donde no sea posible encontrar líneas de visión directa entre los sensores.
 
 \subsubsection{4 balizas}
 
@@ -220,10 +220,13 @@ Colocando 4 sensores como balizas con la disposición indicada en la Figura~\ref
 En general, a lo largo de toda la sección se pueden apreciar unas desviaciones estándar mayores que en el caso del laboratorio, como era de esperar.
 Esto se debe principalmente a la disposición de las balizas en un escenario menos favorable, pero también a un menor volumen de medidas en cada punto al solo disponer de una trayectoria.
 
-A comparación de las medidas con el mismo número de balizas en el laboratorio se obtienen en este caso tanto un valor medio como una dispersión mayor, fruto del entorno menos favorable.
+% A comparación de las medidas con el mismo número de balizas en el laboratorio se obtienen en este caso tanto un valor medio como una dispersión mayor, fruto del entorno menos favorable.
 
 Las distancias entre objetivo y balizas son, en este escenario, muy superiores con al menos una de dichas balizas a más de 10 metros de forma constante.
-Así, los resultados obtenidos aquí coinciden con las conclusiones extraídas de las medidas del laboratorio, donde una configuración de balizas más alejadas proporcionaba peores resultados.
+Así, los resultados obtenidos aquí coinciden con las conclusiones extraídas de las medidas del laboratorio, donde una configuración con balizas más alejadas proporcionaba peores resultados.
+
+Además, con cuatro balizas colocadas solo es posible asegurar en todo momento que el objetivo tendrá visión directa con una de las balizas en cada punto de la trayectoria, la que se colocó en el pasillo en el que se encuentre el robot.
+Es por ello más probable que se hayan dado en esta primera trayectoria casos en los que la señal utilizada en el posicionamiento se haya visto entorpecida, lo que podría también explicar los altos valores medios y de desviación en los datos.
 
 \begin{figure}[H]
     \centering
@@ -265,7 +268,7 @@ Este efecto ya fue discutido en el análisis de las medidas del laboratorio.
 Una de las conclusiones en aquel caso era que una distribución uniforme de las balizas proporcionaba mejores resultados, y no simplemente un número mayor sin considerar su posición.
 
 Debido a la distribución de la planta las dos balizas más cercanas a los puntos mencionados se colocaron a poco más de dos metros entre ellas.
-Esta baja separación hace que las medidas que las usan no presenten una gran mejora respecto a los casos en los que solo una de ellas participaba en los cálculos.
+Esta escasa separación hace que las medidas en las que se ven utilizadas no presenten una gran mejora respecto a los casos en los que solo una de ellas participaba en los cálculos.
 
 \begin{table}[H]
   \centering
@@ -282,7 +285,7 @@ Esta baja separación hace que las medidas que las usan no presenten una gran me
 \label{tab:media_fisica_6}
 \end{table}
 
-A pesar de las escasas mejoras en los puntos mencionados anteriormente, los valores medios recogidos en la Tabla \ref{tab:media_fisica_6} sí que presentan mejoras significativas en este caso con más balizas.
+A pesar de las escasas mejoras en los puntos mencionados anteriormente, los valores medios recogidos en la Tabla \ref{tab:media_fisica_6} sí que presentan mejoras significativas en esta configuración con más balizas.
 
 \subsubsection{8 balizas}
 
@@ -295,9 +298,10 @@ Por último, se añadieron otros dos sensores para tener 8 balizas tal y como se
 \end{figure}
 
 En este caso es posible observar una mejora generalizada tanto en valores de discrepancia como en sus desviaciones, salvo en el punto 4.
-Tras revisar los datos el valor tan alto se debe a un error mayor en el posicionamiento de los sensores, que indicaban en el eje $y$ una posición que colocaría al robot fuera de la planta.
+Tras revisar los datos en busca de la fuente de este error se comprobó que fue debido a un fallo en el posicionamiento de los sensores, no del posicionamiento local del robot.
+La posición que proporcionaron dio en el eje $y$ un valor que colocaría al robot fuera de la planta.
 
-Este hecho se repite a lo largo de las tres medidas realizadas, aunque con distintos valores --de ahí también el alto valor en la desviación estándar de las medidas en el punto--, por lo que es posible que se trate de un caso en el que la tercera baliza utilizada se haya visto ocultada por una de las columnas.
+Este hecho se repite a lo largo de las tres medidas realizadas, aunque con distintos valores --de ahí también el alto valor en la desviación estándar de las medidas en el punto--, por lo que es probable que se trate de un caso en el que la tercera baliza utilizada --en dos de ellas se tenía una visión directa-- se haya visto ocultada por una de las columnas.
 
 \begin{table}[H]
   \centering
