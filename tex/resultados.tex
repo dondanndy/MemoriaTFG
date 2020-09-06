@@ -45,20 +45,22 @@ Los datos con cada una ellas por separados se encuentran en el Apéndice 1.
 
 Con la configuración de cuatro balizas definida en la Figura~\ref{fig:lab_4sens} se obtuvieron los datos recopilados en las Tablas \ref{tab:media_lab_4_vertical} para la trayectoria vertical, \ref{tab:media_lab_4_espiral} para la trayectoria en espiral y \ref{tab:media_lab_4_aleatoria} para la trayectoria aleatoria.
 
-Los datos acumulados de las tres trayectorias están recogidos en la Tabla \ref{tab:media_lab_4_total}, y representados en Figura~\ref{fig:res_lab}
+Los datos acumulados de las tres trayectorias están recogidos en la Tabla \ref{tab:media_lab_4_total}, y representados en Figura~\ref{fig:res_lab}.
 % \footnote{La presentación de los resultados expuestos a lo largo de la sección se han obtenido por interpolación a partir de las referencias definidas por los valores experimentales los puntos medidos, separados por un metro en el caso del laboratorio e indicados con el valor obtenido en cada cada uno de ellos sobre el lugar donde se obtuvo. La interpolación fue realizada usando splines bicúbicos, de tal manera que los valores en los puntos de referencia no han sido alterados.
 % Entre paréntesis se indica la desviación estándar de los valores obtenidos en cada punto.}
+Es posible observar un valor muy alto en la discrepancia en en el eje $x$ en el punto 34 --definido en la Figura~\ref{fig:puntos}--.
+Teniendo en cuenta que en los puntos adyacentes no ocurre, es posible achacar esta alta discrepancia a puras fluctuaciones estadísticas o, de forma más probable, a una falta de visión directa entre objetivo y balizas, teniendo en cuenta que no se repite en más puntos.
+
+Para tratar de comprobar el comportamiento general de la combinación de sensores y robot más allá de puntos con valores especialmente altos o bajos se recoge la Tabla~\ref{tab:resumen_lab_4} con los valores medios y dispersión del error a lo largo de cada uno de los ejes y del error en el posicionamiento en el caso de uso de 4 balizas.
+
 \begin{figure}[H]
     \centering
+    \hspace*{-0.5cm}
     \input{graph/res/4sensores.pgf}
+    \captionsetup{justification=justified}
     \caption{Resultados de las medidas en el laboratorio con 4 balizas.\newline En esta representación y en todas las sucesivas figuran los valores de error obtenidos en los puntos del laboratorio donde se tomaron las medidas. A partir de ellos se ha realizado una interpolación con splines bicúbicos para obtener la distribución continua que se ha representado. \newline Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
     \label{fig:res_lab}
 \end{figure}
-
-Es posible observar un valor muy alto en la discrepancia en en el eje $x$ en el punto 34 --definido en la Figura~\ref{fig:puntos}--.
-Teniendo en cuenta que en los puntos adyacentes no ocurre, es posible achacar esta alta discrepancia a puras fluctuaciones estadísticas o a una falta de visión directa entre objetivo y balizas, teniendo en cuenta que no se repite en más puntos.
-
-Para tratar de comprobar el comportamiento general de la combinación de sensores y robot más allá de puntos con valores especialmente altos o bajos se recoge la Tabla~\ref{tab:resumen_lab_4} con los valores medios y dispersión del error a lo largo de cada uno de los ejes y del error en el posicionamiento en el caso de uso de 4 balizas.
 
 % Como se comentaba al inicio de la sección, la dificultad a la hora de evaluar la discrepancia en el posicionamiento que conlleva el uso del robot hace que sea difícil evaluar el rendimiento de los sensores a partir de los resultados de posicionamiento, aunque sí es posible hacerlo teniendo en cuenta la desviación en la toma de medidas de cada punto.
 
@@ -75,8 +77,8 @@ Para tratar de comprobar el comportamiento general de la combinación de sensore
     \multicolumn{1}{|c|}{Máximo}     &  20.1 & 14.4  & 56.6 & 14.4 & 57.6   \\ \hline
     \multicolumn{1}{|c|}{Mínimo}     & -56.6 & -12.4 & 0.5 & 0.7 & 7.2    \\ \hline
     \end{tabular}
-    \label{tab:resumen_lab_4}
     \caption{Resumen de los errores en el laboratorio con 4 balizas.}
+    \label{tab:resumen_lab_4}
 \end{table}
 
 La cercanía entre los valores de media y mediana en todos los casos sugiere una distribución uniforme de los datos, lo que denotaría una densidad de probabilidad gaussiana, como se planteaba al inicio de la sección.
@@ -110,7 +112,8 @@ Es posible comprobar este hecho con un histograma de los valores obtenidos en la
     \label{fig:histogramas_lab_4sens}
   \end{figure}
 
-En los histogramas es claramente apreciable la naturaleza gaussiana de los valores obtenidos, por lo que es posible ajustar los valores a distribuciones de probabilidad normales y permite utilizar la media y la desviación estándar como parámetros principales para analizar el rendimiento del sistema establecido entre robot y sensores, aunque un volumen mayor de medidas hubiese resultado en mejores ajustes.
+En los histogramas es claramente apreciable la naturaleza gaussiana de los valores obtenidos, por lo que es posible ajustar los valores a distribuciones de probabilidad normales.
+Esto permite utilizar la media y la desviación estándar como parámetros principales para analizar el rendimiento del sistema establecido entre robot y sensores, aunque un volumen mayor de medidas hubiese resultado en mejores ajustes.
 
 En el caso del error en la posición, fruto de la combinación de distribuciones gaussiana de acuerdo a \eqref{eq:vec_pos} la parametrización usual es la de una función gamma \cite{jimenez}.
 
@@ -121,11 +124,15 @@ En el caso del error en la posición, fruto de la combinación de distribuciones
 % En el caso en el que estos ángulos sean muy agudos --cosa que ocurre en cada uno de los ejes donde la desviación estándar crece-- el posicionamiento por triliteración comienza a presentar un rendimiento muy pobre.
 
 \subsubsection{6 balizas}
-Tras la colocación de dos balizas adicionales a lo largo de los extremos en el eje $x$ tal y como se indicaba en la Figura~\ref{fig:lab_6sens} se obtuvieron los siguientes resultados recogidos en la Figura~\ref{fig:res_lab} y en la Tabla~\ref{tab:media_lab_6_total}.
-
+Tras la colocación de dos balizas adicionales a lo largo de los extremos en el eje $x$ tal y como se indicaba en la Figura~\ref{fig:lab_6sens}.
 Al igual que en el caso de 4 balizas, los datos recopilados se encuentran en las Tablas \ref{tab:media_lab_6_vertical} para la trayectoria vertical, \ref{tab:media_lab_6_espiral} para la trayectoria en espiral y \ref{tab:media_lab_6_aleatoria} para la trayectoria aleatoria.
 
+Al agregar los datos de todas esta trayectorias se obtuvieron los resultados recogidos en la Tabla~\ref{tab:media_lab_6_total} y representados en la Figura~\ref{fig:res_lab}.
+
+En este caso es posible observar de nuevo valores extremales en los puntos 1 y 4, pero no en el 34, lo que confirma que aquel caso se trataba de un error por fluctuaciones estadísticas y no por un error en la configuración en la medida.
+Esta misma explicación es aplicable a este caso, que incluye valores máximos mucho más cercanos a la media, como se recoge en la tabla de valores medios.
 % Una disposición que evite la formación de ángulos demasiado agudos entre las balizas y el objetivo hará que se pueda obtener un posicionamiento más estable y preciso, como la que se propuso en esta sección con 6 sensores, aunque el kit utilizado solo use las cuatro más cercanas.
+
 \begin{figure}[H]
     \centering
     \input{graph/res/6sensores.pgf}
@@ -133,8 +140,6 @@ Al igual que en el caso de 4 balizas, los datos recopilados se encuentran en las
     \label{fig:res_lab}
 \end{figure}
 
-En este caso es posible observar de nuevo valores extremales en los puntos 1 y 4, pero no en el 34, lo que confirma que aquel caso se trataba de un error por fluctuaciones estadísticas y no por un error en la configuración en la medida.
-Esta misma explicación es aplicable a este caso, que incluye valores máximos mucho más cercanos a la media, como se recoge en la tabla de valores medios.
 
 \begin{table}[H]
     \centering
@@ -195,26 +200,37 @@ Una distribución uniforme supondrá, usando este kit, mejores resultados que el
 Esta colocación fue elegida para tratar de tener una distribución lo más uniforme posible, acortando la mayor distancia entre las balizas en su configuración con 4 sensores.
 Es posible que un mayor número de balizas proporcione mejores resultados, especialmente si se añaden en los extremos del eje $y$; no obstante, teniendo en cuenta que la dispersión en ese caso ya era lo suficientemente baja --teniendo sensores en los extremos pero con una distancia entre ellos de solo unos 5 metros--, no se procedió a su análisis en beneficio de tomas de datos de mayor interés.
 
+\newpage
 \subsection{Edificio de Física}
 
-Una vez obtenido los resultados en el laboratorio se repitió la toma de medidas de la misma forma en el edificio B de la Facultad de Física, en un entorno con obstáculos en los que las tomas de medidas se produjeron en todo momento en zonas cercanas a paredes y con un mismo recorrido al no tener opción por la disposición de la planta a colocar el robot en otros lugares.
+Una vez obtenidos los resultados en el laboratorio se repitió la toma de medidas de la misma forma en el edificio B de la Facultad de Física, en un entorno con obstáculos y una mayor superficie a recorrer, características más cercanas a entornos reales en los que hacer uso de la tecnología de posicionamiento.L
+as tomas de medidas se produjeron en todo momento en zonas cercanas a paredes y con un mismo recorrido al no tener opción por la disposición de la planta a colocar el robot en otros lugares.
 
 Así, la presentación de los siguientes datos corresponden a tres medidas de la misma trayectoria en cada caso.
 
-Las medidas en este escenario se realizaron colocando el origen del sistema de referencia en una de las esquinas de la superficie en las que se realizaron, ya que a diferencia del laboratorio, no era posible acceder al centro para establecer ahí dicho origen.
-Esto se ve reflejado en la presentación de los resultados, el los que ahora no aparecen coordenadas negativas.
+Las medidas en este escenario se realizaron colocando el origen del sistema de referencia en una de las esquinas de la planta, ya que a diferencia del laboratorio, no era posible acceder al centro para establecer ahí dicho origen.
+Esto se ve reflejado en la presentación de los resultados, en los que ahora no aparecen coordenadas negativas.
+
+Debido a las características de este escenario es razonable esperar, en general, unos errores en la posición del robot mayores que los que se encontraron en el laboratorio, especialmente en los puntos donde no sea posible encontrar línas de visión directa entre los sensores.
 
 \subsubsection{4 balizas}
 
 Colocando 4 sensores como balizas con la disposición indicada en la Figura~\ref{fig:sensores_fisica_4} se obtuvieron los resultados representados en la Figura~\ref{fig:res_fisica_4} y recogidos en la Tabla~\ref{tab:media_fisica_4_total}.
+
+En general, a lo largo de toda la sección se pueden apreciar unas desviaciones estándar mayores que en el caso del laboratorio, como era de esperar.
+Esto se debe principalmente a la disposición de las balizas en un escenario menos favorable, pero también a un menor volumen de medidas en cada punto al solo disponer de una trayectoria.
+
+A comparación de las medidas con el mismo número de balizas en el laboratorio se obtienen en este caso tanto un valor medio como una dispersión mayor, fruto del entorno menos favorable.
+
+Las distancias entre objetivo y balizas son, en este escenario, muy superiores con al menos una de dichas balizas a más de 10 metros de forma constante.
+Así, los resultados obtenidos aquí coinciden con las conclusiones extraídas de las medidas del laboratorio, donde una configuración de balizas más alejadas proporcionaba peores resultados.
+
 \begin{figure}[H]
     \centering
     \input{graph/res/fisica_4sensores.pgf}
     \caption{Resultados de las medidas en el edificio de Física con 4 balizas. \newline Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
     \label{fig:res_fisica_4}
 \end{figure}
-
-En general, a lo largo de toda la sección se pueden apreciar unas desviaciones estándar mayores que en el caso del laboratorio: esto se debe a una disposición menos favorable y a un menor volumen de medidas en cada punto.
 
 \begin{table}[H]
   \centering
@@ -231,14 +247,10 @@ En general, a lo largo de toda la sección se pueden apreciar unas desviaciones 
   \label{tab:media_fisica_4}
 \end{table}
 
-A comparación de las medidas con el mismo número de balizas en el laboratorio se obtienen en este caso tanto un valor medio como una dispersión mayor, fruto del entorno menos favorable.
-
-Las distancias entre objetivo y balizas es, en este entorno, muy superior con al menos una de dichas balizas a más de 10 metros de forma constante.
-Así, los resultados obtenidos aquí coinciden con las conclusiones extraídas de las medidas del laboratorio, donde una configuración de balizas más alejadas proporcionaba peores resultados.
-
+\newpage
 \subsubsection{6 balizas}
 
-Añadiendo dos balizas como se indicaba en \ref{fig:sensores_fisica_6} se obtuvieron los resultados que se han representado en la Figura~\ref{fig:res_fisica_6} y recogidos en la Tabla~\ref{tab:media_fisica_6_total}.
+Añadiendo dos balizas como se indicaba en la Figura~\ref{fig:sensores_fisica_6} se obtuvieron los resultados representados en la Figura~\ref{fig:res_fisica_6} y recogidos en la Tabla~\ref{tab:media_fisica_6_total}.
 \begin{figure}[H]
   \centering
   \input{graph/res/fisica_6sensores.pgf}
@@ -334,9 +346,9 @@ La diferencia entre media y mediana lo muestra, aunque ambos valores son los mej
     \label{fig:boxplot_fisica}
 \end{figure}
 
-Los diagramas de cajas de la Figura~\ref{fig:boxplot_fisica} muestran unos resultados similares a los obtenidos en el laboratorio: un número mayor de balizas resulta en unos valores menores en el error del posicionamiento del objetivo.
+Los diagramas de cajas de la Figura~\ref{fig:boxplot_fisica} muestran unos resultados similares a los obtenidos en el laboratorio: un número mayor de balizas resulta en unos valores más bajos de error en el posicionamiento del objetivo.
 
-Además, confirma la conclusión expuesta en la comparación de aquellos resultados: debido a la utilización de 4 balizas en todo momento del kit la posición en la que se colocan es crítica.
+Además, confirma la conclusión expuesta en la comparación de aquellos resultados: debido a la utilización de 4 balizas en todo momento del kit, independientemente del número de balizas configuradas en total, la posición en la que se colocan es crítica.
 
 Es posible observar este hecho en los diagramas de cada eje.
 En la configuración con 6 balizas se añadieron en los extremos del eje $y$, y es en dicho eje donde se observan unas mejoras en mayor medida, a pesar de que, como se ha comentado, una de las balizas tuviera una colocación mejorable.
@@ -345,8 +357,8 @@ El mismo fenómeno se da en el caso del empleo de 8 balizas, donde la colocació
 
 Aunque los resultados en este escenario no ideal son, como era de esperar, peores que en el ideal, la diferencia relativa en el caso de 4 balizas es del $23.4$ \% para los valores medios y $18.9$ \% para las desviaciones estándar del posicionamiento, que equivalen a unos pocos centímetros.
 Estas diferencias se deben principalmente a la mayor distancia entre balizas y objetivo, y no tanto a la presencia de obstáculos.
-La anchura de las columnas no parece ser suficiente para evitar la línea de visión directa entre las balizas y el objetivo, aunque sí que es posible apreciar su efecto puntualmente como en el caso del uso de 8 balizas, dando en uno de los puntos un resultado muy alejado de la media.
+La anchura de las columnas no parece ser suficiente para evitar la línea de visión directa entre las balizas y el objetivo de forma general, aunque sí que es posible apreciar su efecto puntualmente, como en el caso del uso de 8 balizas, dando en uno de los puntos un resultado muy alejado de la media.
 
-La diferencia en los casos con 6 balizas es similar, con una diferencia relativa en los valores medios del $18.9$ \% y $44.4$ \% para las desviaciones estándar del error en el posicionamiento, de nuevo achacables a la mayor distancia entre balizas y objetivo.
+La diferencia en los casos con 6 balizas es similar, con una diferencia relativa en los valores medios del $18.9$ \% y del $44.4$ \% para las desviaciones estándar del error en el posicionamiento, de nuevo achacables a la mayor distancia entre balizas y objetivo.
 
 % Al igual que en el primer escenario, la adición de nuevas balizas fue distribuida de tal forma que el objetivo pueda encontrar, de media, distancias menores respecto a cada una de ellas, obteniendo mejoras más discretas en los puntos donde esto no ocurre.
