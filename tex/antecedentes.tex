@@ -302,7 +302,7 @@ Para mitigar la modificación en la señal en estos casos se recurre a técnicas
 
 \subsection{Tecnologías}
 
-Todos los algoritmos geométricos mencionados necesitan un soporte físico para determinar las variables posicionales del objetivo que requieren, para lo que es posible el uso de varias tecnologías, como se recoge en \cite{COMP}, de donde procede toda la información de esta sección.
+Todos los algoritmos geométricos mencionados necesitan un soporte físico para determinar las variables con las que determinar la posición del objetivo que requieren, para lo que es posible el uso de varias tecnologías, como se recoge en \cite{COMP}, de donde procede toda la información de esta sección.
 
 \subsubsection{Sonido}
 
@@ -382,8 +382,9 @@ En el caso de Europa, la regulación del Instituto Europeo de Normas de Telecomu
 
 \subsubsection{Ventajas}
 
-La principal característica del UWB, su gran ancho de banda, le da varias ventajas en su uso principal y que se discute en este trabajo: servicios de localización a partir de técnicas geométricas.
-Aunque sea el principal uso no es el único, ya que también permite transmisión de datos de una forma rápida y puede ser una alternativa en este tipo de situaciones.
+Las cotas de error inferiores en las técnicas de TOA y TDOA tenían una dependencia inversa respecto al ancho de banda de la señal utilizada, como se indicaba en \eqref{eq:CRLB_TOA}.
+Por ello la principal característica del UWB, su gran ancho de banda, le proporciona una gran ventaja en su empleo para servicios de posicionamiento a partir de dichas técnicas, siendo su uso principal y el discutido en este trabajo.
+Aunque no es el único, ya que también permite la transmisión de datos de una forma rápida y puede llegar a ser una alternativa en este ámbito.
 
 El espectro tan amplio de frecuencia provoca que el decaimiento de la señal, dependiente de la frecuencia, sea fácilmente identificable al estar formado de componentes que sufren este hecho de forma acusada.
 
@@ -527,7 +528,7 @@ Con la adición de ruido blanco gaussiano y teniendo en cuenta las técnicas geo
 
 \subsection{Robot}
 
-Con el fin de automatizar la toma de medidas para hacerla lo más eficiente posible se usó un robot móvil capaz de desplazarse mediante navegación autónoma en un entorno conocido.
+Con el fin de automatizar la toma de medidas para hacerla lo más eficiente posible se ha decidido usar un robot móvil capaz de desplazarse mediante navegación autónoma en un entorno conocido.
 
 El elegido en este caso fue el robot TurtleBot 2, un robot con fines educativos y de investigación capaz de desplazarse y orientarse con total libertad en superficies llanas, como eran los en el que se desarrolló este trabajo.
 En la Figura~\ref{fig:robot} se puede ver el robot durante una de las tomas de medidas.
@@ -542,19 +543,23 @@ En la Figura~\ref{fig:robot} se puede ver el robot durante una de las tomas de m
 El TurtleBot funciona con ROS --\textit{Robot Operating System}, en inglés--, un entorno de trabajo enfocado a los sistemas robóticos encargado del soporte para todos los dispositivos hardware del robot como motores, encoders o cámaras. 
 Cuenta con diversas librerías para distintos casos de uso, entre las que se encuentra la navegación en un entorno controlado como la que se da en el caso de este trabajo.
 
+Su funcionamiento se basa en una arquitectura de grafos, donde se definen nodos en los que se realiza el procesamiento de sensores, control, actuadores o cualquier otra función.
+Los nodos se comunican entre ellos con mensajes llamados \textit{topic}, y es posible su desarrollo con los lenguajes C++ y Python.
+
 Dentro de los paquetes disponibles, el usado en el desarrollo del trabajo es el encargado de la navegación del robot, que permite desplazar al robot a cualquier punto del entorno de trabajo.
 
 Es posible acoplar al robot un sistema de visión llamado Kinect que, mediante luz, permite obtener un mapa de profundidad del entorno que lo rodea.
 Fue desarrollado en primera instancia para el uso en videojuegos pero su uso también se ha extendido a labores de investigación al permitir el posicionamiento de objetos y paredes, de tal manera que permite al robot evitar obstáculos dinámicos en el caso de que interpongan en su camino.
 
-La funcionalidad de navegación aprovecha estos sensores realizando una fusión de sus resultados con los datos de movimiento de los motores que realizan el movimiento de tal forma que es posible corregir cualquier error en casos donde el movimiento de las ruedas no se traslade directamente en movimiento del robot, como puede ocurrir al rotar sobre sí mismo.
+La funcionalidad de navegación aprovecha estos sensores realizando una fusión de sus resultados con los datos de movimiento de los motores que impulsan al robot, de tal forma que es posible corregir cualquier error en casos donde el empuje de las ruedas no se traslade directamente en un desplazamiento del robot, como puede ocurrir al rotar sobre sí mismo.
 
-Para conseguir el posicionamiento en el mapa el paquete de navegación construye un \textit{planner} global sobre el que es posible determinar las rutas a seguir por el robot para llegar a un punto dado sorteando obstáculos y paredes.
+Para conseguir el posicionamiento en el mapa el paquete de navegación utiliza un \textit{planner} global sobre el que es posible determinar las rutas a seguir por el robot para llegar a un punto dado sorteando obstáculos y paredes.
 Junto a él trabaja un \textit{planner} local, en el que gracias a los sensores incorporados se evalúan de forma continua los alrededores del robot.
 Así, es posible conseguir de forma continua una evaluación de los posibles obstáculos que no se encuentran en el mapa del planner global, para lo que se construye un mapa de costes con el fin de abortar el movimiento en el caso de que sea imposible alcanzar el punto objetivo.
 
 Con la información actualizada del \textit{planner} local, el \textit{planner} global es capaz de proporcionar la posición del robot en el mapa.
 Es posible observar un esquema del funcionamiento de estos sistemas en la Figura~\ref{fig:move_base}.
+% PREGUNTAR ESTO. Como va el amcl exactamente?
 
 \begin{figure}[H]
     \centering
@@ -587,12 +592,12 @@ Aunque es compatible con Stage, sus funcionalidades brillan al usar el robot en 
 
 \subsection{Sensores UWB}
 
-Aunque el uso de UWB para el posicionamiento no está, al escribir este trabajo, utilizado de forma masiva, existen varias implementaciones comerciales que hacen uso de las técnicas geométricas mencionadas en secciones anteriores.
+Aunque el uso de UWB para el posicionamiento no está, al escribir este trabajo, utilizado de forma masiva, existen varias implementaciones comerciales de las técnicas geométricas mencionadas en secciones anteriores.
 A pesar de que el uso de sensores propios es habitual, la adaptación de teléfonos móviles para la estimación de la posición también ha sido explorada por empresas como BeSpoon, a la espera de una implantación mayoritaria de hardware compatible en el diseño de estos dispositivos.
 
 Los sensores utilizados han sido los pertenecientes al kit MDEK1001 ofertado por la empresa DecaWave.
 Se trata de un sistema que ofrece, con una configuración mínima, la posibilidad de usar cualquiera de los componentes como baliza u objetivo.
-Además, implementa un algoritmo de posicionamiento con al menos tres balizas de, según el fabricante, hasta 10cm de precisión con visión directa \cite{Decawave}.
+Además, implementa un algoritmo de posicionamiento con al menos tres balizas de, según el fabricante, hasta 10~cm de precisión con visión directa \cite{Decawave}.
 
 Este kit está formado por los módulos de desarrollo DW1001, encapsulados en una carcasa de plástico que permite colocarlos encima de una superficie plana o su colocación en paredes, como se puede observar en la Figura~\ref{fig:sensor_UWB}.
 Permiten su uso con baterías, como fue el uso en este trabajo para las balizas, o a partir de alimentación a través del puerto USB utilizado para la recolección de datos.
@@ -606,14 +611,14 @@ Permiten su uso con baterías, como fue el uso en este trabajo para las balizas,
 
 Algunas alternativas comerciales cuentan con antenas direccionales que permiten usar técnicas de AOA, pero no es el caso del kit utilizado que solo permite el posicionamiento con TOA y TDOA.
 
-Los sensores, además de la comunicación por UWB, también permiten la comunicación por Bluetooth para su configuración como objetivos o balizas y en este último caso, la posición que ocupan.
+Los sensores, además de la comunicación por UWB, también permiten el uso de Bluetooth para su configuración como objetivos o balizas y en este último caso, para establecer la posición en la que se encuentran.
 También permite configurar estas posiciones de las balizas de forma automática, aunque requiere que todas se coloquen en el mismo plano y en general una configuración manual proporcionará unos mejores resultados.
 
 Para la comunicación por UWB los sensores utilizan el canal 5, con frecuencia central de $6,5$GHz y ancho de banda de $499.2$MHz que le permiten una tasa de datos de $6.81$Mbps \cite{Decawave}.
 
 El inicio de comercialización de dicho kit se remonta a 2017, por lo que no existe una amplia bibliografía sobre su uso en entornos reales más allá de los datos proporcionados por el fabricante.
 
-En trabajos anteriores es posible encontrar mediciones tanto en entornos sin obstáculos con distancias bajas, en las que la precisión se encuentra en torno a los 18cm \cite{Simedroni}; como en escenarios con distancias amplias y ciertas situaciones sin línea de visión directa, donde la discrepancias crecen hasta unos 50cm \cite{jimenez, kulmer}.
+En trabajos anteriores es posible encontrar mediciones tanto en entornos sin obstáculos con distancias bajas, en las que la precisión se encuentra en torno a los 18~cm \cite{Simedroni}; como en escenarios con distancias amplias y ciertas situaciones sin línea de visión directa, donde la discrepancias crecen hasta unos 50~cm \cite{jimenez, kulmer}.
 
 DecaWave ofrece para su configuración y uso una aplicación para teléfonos móviles Android en la que representa en un mapa la posición de los sensores marcados como objetivos, pero también es posible una conexión a un ordenador como puerto serie.
 

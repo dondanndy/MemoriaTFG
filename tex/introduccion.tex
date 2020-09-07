@@ -19,6 +19,7 @@ Aunque su objetivo es el mismo, los entornos interiores requieren una precisión
 % Con el mismo resultado como objetivo estas tecnologías tienen serias diferencias debido a las circunstancias para las que se desarrollan: entre ellas se encuentran principalmente la precisión requerida, mucho mayor en interiores, o la necesidad de lidiar con un espectro electromagnético más poblado.
 
 A diferencia del caso del posicionamiento global, existen dos tipos de algoritmos: unos basados en argumentos geométricos a partir de emisores con posición conocida, y otros consistentes en un mapeado previo de la zona de interés.
+En ambos casos se utilizan balizas de posición conocida, como se indica en el esquema de la Figura~\ref{fig:Gen}.
 Estas técnicas y las tecnologías sobre las que se implementan son las principales diferencias entre las alternativas comerciales disponibles.
 
 La proliferación de la comunicación inalámbrica ha provocado una saturación en el espectro electromagnético, de tal forma que nuevos usos que puedan emplear este tipo de ondas se vean seriamente afectados por interferencias en la frecuencias en uso.
@@ -41,7 +42,8 @@ El robot utilizado ha sido el Turtlebot 2, un pequeño robot con fines educativo
 Aunque es posible una navegación libre a partir de los sensores mencionados, para este trabajo se creó un mapa de los dos escenarios en los que se produjo la toma de medidas para que su posicionamiento local fuese lo más preciso posible.
 
 Dicho robot fue empleado en dos escenarios para poder comparar el desempeño de los sensores de UWB en dos situaciones distintas.
-Así, en la elección los dos escenarios se primó la posibilidad de comparar una situación ideal, con visión directa y distancias cortas; y una situación más parecida a un uso habitual, con un escenario en el que, en ocasiones, pueda haber obstáculos que dificulten el traslado de la señal de UWB.
+Así, en la elección de los dos escenarios se primó la posibilidad de comparar una situación ideal, con visión directa y distancias cortas; y una situación más parecida a un uso habitual.
+En este último escenario se contemplaba que, en ocasiones, pueda haber obstáculos que dificulten el traslado de la señal de UWB.
 
 La primera toma de medidas se llevó a cabo en uno de los laboratorios de los Institutos Universitarios de Investigación en el que se disponía de una superficie amplia y libre; la segunda localización tuvo lugar en el edificio B de la Facultad de Física, donde por razones estructurales existen varias columnas en sus plantas y en ocasiones aparece un leve tráfico de personas.
 
@@ -55,4 +57,5 @@ Así, los objetivos de este trabajo son
     \item Evaluar de nuevo la precisión de los sensores en un segundo escenario menos favorable, con obstáculos que puedan interferir en las tareas de posicionamiento y así poder comprobar cómo afectan estas nuevas variables a los errores en la posición obtenida.
     \item Comparar el desempeño de la tecnología en ambos escenarios, y las discrepancias frente a los valores teóricos.
     \item En ambos casos, realizar medidas con distintas configuraciones de los sensores para evaluar cuáles de ellas arrojan mejores resultados y así encontrar el mejor equilibrio entre su desempeño y su complejidad.
+    \item El aprendizaje y familiarización con el funcionamiento de un robot autónomo y su desplazamiento en entornos controlados.
 \end{itemize}

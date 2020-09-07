@@ -24,9 +24,10 @@ Así, las componentes de dicho vector son las definidas en \eqref{eq:Diff_eje} y
 
 A la hora de interpretar los resultados a partir de la toma de medidas y con el tratamiento especificado cabe recordar que en \eqref{eq:Diff_eje} se incluyen dos fuentes de error, por un lado el posicionamiento local del robot y por otro el posicionamiento por triliteración de los sensores de UWB.
 
-La evaluación de la bondad del posicionamiento de los sensores, teniendo en cuenta la posibilidad de tomar con ellos tantas medidas como sea posible, es directa, dando en todos los casos una distribución gaussiana, como era de esperar y como se podía ver en la Figura~\ref{fig:datos_sensor}; aun así, según los datos proporcionados por el fabricante y contrastados en trabajos previos nos da unos errores de como mínimo 10cm.
+La evaluación de la bondad del posicionamiento de los sensores, teniendo en cuenta la posibilidad de tomar con ellos tantas medidas como sea posible, es directa, dando en todos los casos una distribución gaussiana, como era de esperar y como se podía ver en la Figura~\ref{fig:datos_sensor}; aun así, según los datos proporcionados por el fabricante y contrastados en trabajos previos nos da unos errores de como mínimo 10~cm.
 
-En el caso del robot los sistemas de posicionamiento local propios, basados en la fusión de datos de odometría y de posicionamiento de objetos arrojan una precisión de 10cm con un perfil también normal \cite{POSRobot}.
+En el caso del robot los sistemas de posicionamiento local propios, basados en la fusión de datos de odometría y de posicionamiento de objetos del entorno arrojan un error en la posición de 10~cm, con un perfil también normal \cite{POSRobot}.
+% PREGUNTAR ESTO. Como poner cada eje?
 % Sin embargo, dependen también de la presencia de paredes u objetos contra los que comparar los datos de odometría que proporcionan los motores lo mueven.
 
 La adición de ambas fuentes de error, siguiendo el teorema del límite central, nos dará una distribución que tenderá con un número creciente de medias hacia otra distribución gaussiana con el error total en la posición del robot.
@@ -39,7 +40,7 @@ La toma de numerosas medidas con distintas rutas trata de minimizar este hecho, 
 Como se comentaba en la sección de metodología, se diseñaron varias trayectorias a recorrer por el robot para así eliminar cualquier sesgo en los errores de su posicionamiento local.
 
 Los resultados expuestos en esta sección son fruto de la composición de las medidas de todas las trayectorias recorridas por el robot en cada caso.
-En el Apéndice 1 es posible encontrar tablas con los datos de cada trayectoria por separado.
+En el Apéndice A es posible encontrar tablas con los datos de cada trayectoria por separado.
 
 \subsubsection{4 balizas}
 
@@ -58,7 +59,7 @@ Para tratar de comprobar el comportamiento general de la combinación de sensore
     \hspace*{-0.5cm}
     \input{graph/res/4sensores.pgf}
     \captionsetup{justification=justified}
-    \caption{Resultados de las medidas en el laboratorio con 4 balizas.\newline En esta representación y en todas las sucesivas figuran los valores de error obtenidos en los puntos del laboratorio donde se tomaron las medidas. A partir de ellos se ha realizado una interpolación con splines bicúbicos para obtener la distribución continua que se ha representado. \newline Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
+    \caption{Resultados de las medidas en el laboratorio con 4 balizas.\newline En esta representación y en todas las sucesivas figuran los valores de error obtenidos en los puntos del laboratorio donde se tomaron las medidas. A partir de ellos se ha realizado una interpolación con splines bicúbicos para obtener la distribución continua que se ha representado. Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
     \label{fig:res_lab}
 \end{figure}
 
@@ -67,13 +68,14 @@ Para tratar de comprobar el comportamiento general de la combinación de sensore
 % Teniendo en cuenta este dato es posible comprobar que el comportamiento en los ejes $x$ e $y$ es completamente complementario: mientras que en uno de ellos la dispersión y por tanto la bondad del posicionamiento crece en los extremos, en el otro lo hace en el centro.
 
 \begin{table}[H]
+  \hspace*{-0.5cm}
     \centering
     \begin{tabular}{c|c|c|c|c|c|}
     \cline{2-6}
-                                     & \begin{tabular}[c]{@{}c@{}}Eje $x$ \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $y$  \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $x$ (absoluto) \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $y$ (absoluto) \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Posición \\ (cm) \end{tabular}\\ \hline
+                                     & \begin{tabular}[c]{@{}c@{}}Error en \\ eje $x$ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en \\ eje $y$ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en eje $x$ \\ (absoluto) (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en eje $y$ \\ (absoluto) (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en \\ posición(cm) \end{tabular}\\ \hline
     \multicolumn{1}{|c|}{Media}      & -6.7  &  3.1  & 14.6 & 5.77 &  20.0   \\ \hline
     \multicolumn{1}{|c|}{Mediana}    & -3.3  &  4.1  & 13.1 & 4.9 &  17.7   \\ \hline
-    \multicolumn{1}{|c|}{Desviación estándar} & 17.8  &  5.9  & 12.2 & 3.4 & 9.6    \\ \hline
+    \multicolumn{1}{|c|}{Desv. estándar} & 17.8  &  5.9  & 12.2 & 3.4 & 9.6    \\ \hline
     \multicolumn{1}{|c|}{Máximo}     &  20.1 & 14.4  & 56.6 & 14.4 & 57.6   \\ \hline
     \multicolumn{1}{|c|}{Mínimo}     & -56.6 & -12.4 & 0.5 & 0.7 & 7.2    \\ \hline
     \end{tabular}
@@ -89,7 +91,7 @@ Es posible comprobar este hecho con un histograma de los valores obtenidos en la
       \centering
       \input{./graph/hist_lab_4_x.tex} 
       \vspace*{-0.5cm}
-      \caption{Eje $x$}
+      \caption{Error en eje $x$}
       \label{fig:histogramas_lab_4sens_x}
     \end{subfigure}
     ~~~~~~~~~
@@ -97,7 +99,7 @@ Es posible comprobar este hecho con un histograma de los valores obtenidos en la
       \centering
       \input{./graph/hist_lab_4_y.tex}
       \vspace*{-0.5cm}
-      \caption{Eje $y$}
+      \caption{Error en eje $y$}
       \label{fig:histogramas_lab_4sens_y}
     \end{subfigure}
     ~~~~~
@@ -105,12 +107,14 @@ Es posible comprobar este hecho con un histograma de los valores obtenidos en la
         \centering
         \input{./graph/hist_lab_4_pos.tex}
         \vspace*{-0.5cm}
-        \caption{Posición}
+        \caption{Error en posición}
         \label{fig:histogramas_lab_4sens_pos}
       \end{subfigure}
     \caption{Histogramas con todas las medidas realizadas con 4 balizas, normalizados.}
     \label{fig:histogramas_lab_4sens}
   \end{figure}
+
+% PREGUNTAR ESTO. Aclaración, son medidas.
 
 En los histogramas es claramente apreciable la naturaleza gaussiana de los valores obtenidos, por lo que es posible ajustar los valores a distribuciones de probabilidad normales.
 Esto permite utilizar la media y la desviación estándar como parámetros principales para analizar el rendimiento del sistema establecido entre robot y sensores, aunque un volumen mayor de medidas hubiese resultado en mejores ajustes.
@@ -136,19 +140,20 @@ Esta misma explicación es aplicable a este caso, que incluye valores máximos m
 \begin{figure}[H]
     \centering
     \input{graph/res/6sensores.pgf}
-    \caption{Resultados de las medidas del laboratorio con 6 balizas. \newline Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
+    \caption{Resultados de las medidas del laboratorio con 6 balizas. Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
     \label{fig:res_lab}
 \end{figure}
 
 
 \begin{table}[H]
     \centering
+    \hspace*{-0.5cm}
     \begin{tabular}{c|c|c|c|c|c|}
     \cline{2-6}
-                                     & \begin{tabular}[c]{@{}c@{}}Eje $x$ \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $y$  \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $x$ (absoluto) \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $y$ (absoluto) \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Posición \\ (cm) \end{tabular}\\ \hline
+                                     & \begin{tabular}[c]{@{}c@{}}Error en \\ eje $x$ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en \\ eje $y$ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en eje $x$ \\ (absoluto) (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en eje $y$ \\ (absoluto) (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en \\ posición(cm) \end{tabular}\\ \hline
     \multicolumn{1}{|c|}{Media}      & -3.7  & 0.7  &  9.6 &  7.7  &  19.2   \\ \hline
     \multicolumn{1}{|c|}{Mediana}    & -2.2  & 2.08  &  8.8 &  6.0  &  18.2   \\ \hline
-    \multicolumn{1}{|c|}{Desviación estándar} & 11.0  &  10.3  & 6.5 & 6.8 &  6.1    \\ \hline
+    \multicolumn{1}{|c|}{Desv. estándar} & 11.0  &  10.3  & 6.5 & 6.8 &  6.1    \\ \hline
     \multicolumn{1}{|c|}{Máximo}     & 15.9  & 17.4  & 24.9 & 33.9 & 35.8   \\ \hline
     \multicolumn{1}{|c|}{Mínimo}     & -24.9 & -33.9 & 0.1 & 0.1 &  8.6    \\ \hline
     \end{tabular}
@@ -203,7 +208,7 @@ Es posible que un mayor número de balizas proporcione mejores resultados, espec
 \newpage
 \subsection{Edificio de Física}
 
-Una vez obtenidos los resultados en el laboratorio se repitió la toma de medidas de la misma forma en el edificio B de la Facultad de Física, en un entorno con obstáculos y una mayor superficie a recorrer, características más cercanas a entornos reales en los que hacer uso de la tecnología de posicionamiento.
+Una vez obtenidos los resultados en el laboratorio se repitió la toma de medidas con la misma sistemática en el edificio B de la Facultad de Física, en un entorno con obstáculos y una mayor superficie a recorrer, características más cercanas a entornos reales en los que hacer uso de la tecnología de posicionamiento.
 Las medidas se produjeron en todo momento en zonas cercanas a paredes y con un mismo recorrido al no tener opción por la disposición de la planta a colocar el robot en otros lugares.
 
 Así, la presentación de los siguientes datos corresponden, en cada caso, a tres medidas de la misma trayectoria.
@@ -231,18 +236,19 @@ Es por ello más probable que se hayan dado en esta primera trayectoria casos en
 \begin{figure}[H]
     \centering
     \input{graph/res/fisica_4sensores.pgf}
-    \caption{Resultados de las medidas en el edificio de Física con 4 balizas. \newline Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
+    \caption{Resultados de las medidas en el edificio de Física con 4 balizas. Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
     \label{fig:res_fisica_4}
 \end{figure}
 
 \begin{table}[H]
+  \hspace*{-0.5cm}
   \centering
   \begin{tabular}{c|c|c|c|c|c|}
   \cline{2-6}
-                                            & \begin{tabular}[c]{@{}c@{}}Eje $x$ \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $y$  \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $x$ (absoluto) \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $y$ (absoluto) \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Posición \\ (cm) \end{tabular}\\ \hline
+                                            & \begin{tabular}[c]{@{}c@{}}Error en \\ eje $x$ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en \\ eje $y$ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en eje $x$ \\ (absoluto) (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en eje $y$ \\ (absoluto) (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en \\ posición(cm) \end{tabular}\\ \hline
   \multicolumn{1}{|c|}{Media}               &   0.5   &   -8.6  &      15.3          &         15.4       &  26.1    \\ \hline
   \multicolumn{1}{|c|}{Mediana}             &   3.4   &   2.08  &      13.7          &         11.2       &  25.9    \\ \hline
-  \multicolumn{1}{|c|}{Desviación estándar} &   18.4  &   10.2  &      18.7          &         13.8       &  12.5    \\ \hline
+  \multicolumn{1}{|c|}{Desv. estándar} &   18.4  &   10.2  &      18.7          &         13.8       &  12.5    \\ \hline
   \multicolumn{1}{|c|}{Máximo}              &   27.8  &   39.9  &      40.8          &         49.6       &  52.3    \\ \hline
   \multicolumn{1}{|c|}{Mínimo}              &  -40.8  &   -49.6 &      2.3           &         0.5        &  5.5     \\ \hline
   \end{tabular}
@@ -257,27 +263,28 @@ Añadiendo dos balizas como se indicaba en la Figura~\ref{fig:sensores_fisica_6}
 \begin{figure}[H]
   \centering
   \input{graph/res/fisica_6sensores.pgf}
-  \caption{Resultados de las medidas en el edificio de Física con 6 balizas. \newline Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
+  \caption{Resultados de las medidas en el edificio de Física con 6 balizas. Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
   \label{fig:res_fisica_6}
 \end{figure}
 
-Aunque los resultados en este caso son menores, se sigue encontrando el máximo en el punto 10.
+Aunque los resultados en este caso son mejores, se sigue encontrando el máximo en el punto 10.
 Es más, los valores desde el punto 9 al 13 no tienen una mejora significativa con 6 balizas debido a la posición de la baliza adicional en esa pared.
 
 Este efecto ya fue discutido en el análisis de las medidas del laboratorio.
 Una de las conclusiones en aquel caso era que una distribución uniforme de las balizas proporcionaba mejores resultados, y no simplemente un número mayor sin considerar su posición.
 
-Debido a la distribución de la planta las dos balizas más cercanas a los puntos mencionados se colocaron a poco más de dos metros entre ellas.
+Debido a la distribución de la planta, las dos balizas más cercanas a los puntos mencionados se colocaron a poco más de dos metros entre ellas.
 Esta escasa separación hace que las medidas en las que se ven utilizadas no presenten una gran mejora respecto a los casos en los que solo una de ellas participaba en los cálculos.
 
 \begin{table}[H]
+  \hspace*{-0.5cm}
   \centering
   \begin{tabular}{c|c|c|c|c|c|}
     \cline{2-6}
-                                              & \begin{tabular}[c]{@{}c@{}}Eje $x$ \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $y$  \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $x$ (absoluto) \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $y$ (absoluto) \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Posición \\ (cm) \end{tabular}\\ \hline
+                                              & \begin{tabular}[c]{@{}c@{}}Error en \\ eje $x$ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en \\ eje $y$ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en eje $x$ \\ (absoluto) (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en eje $y$ \\ (absoluto) (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en \\ posición(cm) \end{tabular}\\ \hline
     \multicolumn{1}{|c|}{Media}               &  -4.7   &   -11.9 &      16.0          &         12.1       &  23.7    \\ \hline
     \multicolumn{1}{|c|}{Mediana}             &  -3.8   &   -10.4 &      17.7          &         10.3       &  22.7    \\ \hline
-    \multicolumn{1}{|c|}{Desviación estándar} &   18.7  &   10.5  &      10.8          &         10.1       &  10.9    \\ \hline
+    \multicolumn{1}{|c|}{Desv. estándar} &   18.7  &   10.5  &      10.8          &         10.1       &  10.9    \\ \hline
     \multicolumn{1}{|c|}{Máximo}              &   32.1  &   1.1   &      40.8          &         30.8       &  44.1    \\ \hline
     \multicolumn{1}{|c|}{Mínimo}              &  -40.7  &   -30.9 &      3.3           &         0.4        &  7.8     \\ \hline
 \end{tabular}
@@ -293,7 +300,7 @@ Por último, se añadieron otros dos sensores para tener 8 balizas tal y como se
 \begin{figure}[H]
     \centering
     \input{graph/res/fisica_8sensores.pgf}
-    \caption{Resultados de las medidas en el edificio de Física con 8 balizas. \newline Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
+    \caption{Resultados de las medidas en el edificio de Física con 8 balizas. Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
     \label{fig:res_fisica_8}
 \end{figure}
 
@@ -304,13 +311,14 @@ La posición que proporcionaron dio en el eje $y$ un valor que colocaría al rob
 Este hecho se repite a lo largo de las tres medidas realizadas, aunque con distintos valores --de ahí también el alto valor en la desviación estándar de las medidas en el punto--, por lo que es probable que se trate de un caso en el que la tercera baliza utilizada --en dos de ellas se tenía una visión directa-- se haya visto ocultada por una de las columnas.
 
 \begin{table}[H]
+  \hspace*{-0.5cm}
   \centering
   \begin{tabular}{c|c|c|c|c|c|}
     \cline{2-6}
-                                              & \begin{tabular}[c]{@{}c@{}}Eje $x$ \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $y$  \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $x$ (absoluto) \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Eje $y$ (absoluto) \\ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Posición \\ (cm) \end{tabular}\\ \hline
+                                              & \begin{tabular}[c]{@{}c@{}}Error en \\ eje $x$ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en \\ eje $y$ (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en eje $x$ \\ (absoluto) (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en eje $y$ \\ (absoluto) (cm) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Error en \\ posición(cm) \end{tabular}\\ \hline
     \multicolumn{1}{|c|}{Media}               &  -3.5   &  -6.2   &      11.9          &         13.7       &  22.3    \\ \hline
     \multicolumn{1}{|c|}{Mediana}             &  -4.7   &  -7.1   &      11.4          &         9.6        &  19.1    \\ \hline
-    \multicolumn{1}{|c|}{Desviación estándar} &  13.6   &   12.3  &      7.5           &         12.3       &  12.2    \\ \hline
+    \multicolumn{1}{|c|}{Desv. estándar} &  13.6   &   12.3  &      7.5           &         12.3       &  12.2    \\ \hline
     \multicolumn{1}{|c|}{Máximo}              &  21.0   &   48.9  &      25.8          &         48.9       &  55.5    \\ \hline
     \multicolumn{1}{|c|}{Mínimo}              &  -40.7  &  -30.5  &      3.3           &         1.5        &  5.6     \\ \hline
 \end{tabular}

@@ -11,7 +11,7 @@ El archivo común, llamado \texttt{base.h}, contiene el siguiente código:
 	commentstyle=\color{gray},
 	numbers=left,
 	numberstyle=\tiny,
-	basicstyle=\footnotesize,
+	basicstyle=\scriptsize,
 	breaklines=true,
 	tabsize=2}
 
@@ -54,9 +54,7 @@ El archivo común, llamado \texttt{base.h}, contiene el siguiente código:
         unsigned int num_datos = 0;
     
         while (num_datos < MAX_PTS_SENSOR){
-            
             consola.open("/dev/ttyACM0");
-    
             std::getline(consola,linea);
     
             if (linea.size() > 115 && linea.size() < 180) {
@@ -71,10 +69,8 @@ El archivo común, llamado \texttt{base.h}, contiene el siguiente código:
             
                 num_datos++;
             }
-            
             consola.close();
         }
-    
             //TODO
         return("0.0\n");
     }
@@ -83,7 +79,6 @@ El archivo común, llamado \texttt{base.h}, contiene el siguiente código:
         /*
             Devuelve fecha y hora.
          */
-    
         auto now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     
         //Fecha a texto
@@ -123,7 +118,6 @@ El archivo común, llamado \texttt{base.h}, contiene el siguiente código:
                     trans.getBasis().getRPY(roll, pitch, yaw);
                     std::cout << "Yaw - " << yaw << std::endl;
                     dato_OK = false; //Salimos.
-                
                 }
                 catch(tf::TransformException& ex) {
                     //std::cout << "Buscando transformacion \r";
@@ -188,8 +182,7 @@ El archivo común, llamado \texttt{base.h}, contiene el siguiente código:
         ros::spinOnce();
         bool suc;
     
-        std::string date = get_date();
-    
+        std::string date = get_date(); 
         std::string file = ruta + "/turtle_tfg/datos/" + get_date() + ".txt"; // Nombre del archivo para guardar los puntos.
     
         auto posiciones = path(); // Vector con las posiciones de la trayectoria.
@@ -213,12 +206,12 @@ El archivo común, llamado \texttt{base.h}, contiene el siguiente código:
             log_position(file, posiciones[i], tag);
             };
         };
-    
         ROS_INFO("Final de la trayectoria.");
         return 0;
     }
 
 \end{lstlisting}
+\vspace*{0.5cm}
 
 Junto con el archivo base se escribió un archivo adicional para cada una de las trayectorias con la definición de la función \texttt{path()}, que proporciona los puntos a recorrer por el robot.
 
@@ -247,7 +240,6 @@ std::vector<Pose> path() {
 
             position.position.x = x;
             position.position.y = y;
-
             position.orientation = tf::createQuaternionMsgFromYaw(0); //0 grados
 
             ruta.push_back(position);
@@ -258,7 +250,6 @@ std::vector<Pose> path() {
 
                 position.position.x = x;
                 position.position.y = y;
-
                 position.orientation = tf::createQuaternionMsgFromYaw(0); //0 grados
 
                 ruta.push_back(position);
@@ -270,7 +261,6 @@ std::vector<Pose> path() {
 
                 position.position.x = x;
                 position.position.y = y;
-
                 position.orientation = tf::createQuaternionMsgFromYaw(0); //0 grados
 
                 ruta.push_back(position);
@@ -282,7 +272,6 @@ std::vector<Pose> path() {
 
                 position.position.x = x;
                 position.position.y = y;
-
                 position.orientation = tf::createQuaternionMsgFromYaw(0); //0 grados
 
                 ruta.push_back(position);
@@ -294,7 +283,6 @@ std::vector<Pose> path() {
 
                 position.position.x = x;
                 position.position.y = y;
-
                 position.orientation = tf::createQuaternionMsgFromYaw(0); //0 grados
 
                 ruta.push_back(position);
@@ -303,6 +291,7 @@ std::vector<Pose> path() {
         return(ruta);
 }
 \end{lstlisting}
+\vspace*{0.5cm}
 
 En el caso de la trayectoria en vertical que se indica en la Figura \ref{fig:vertical} archivo contenía el siguiente código:
 
@@ -327,12 +316,10 @@ std::vector<Pose> path(){
             if (orient){
                 position.position.x = i;
                 position.position.y = -j;
-
                 position.orientation = tf::createQuaternionMsgFromYaw(0); //0 grados
             } else {
                 position.position.x = i;
                 position.position.y = j;
-
                 position.orientation = tf::createQuaternionMsgFromYaw(0); //0 grados
             }
         ruta.push_back(position);
@@ -342,6 +329,7 @@ std::vector<Pose> path(){
     return(ruta);
 }
 \end{lstlisting}
+\vspace*{0.5cm}
 
 La tercera y última trayectoria hacía que el robot recorriese todo el laboratorio de forma aleatoria.
 Se planteó que en cada trayectoria el orden cambiase, como se indica en el código que la genera:
@@ -381,6 +369,7 @@ std::vector<Pose> path(){
     return(ruta);
 }    
 \end{lstlisting}
+\vspace*{0.5cm}
 
 La última trayectoria fue la utilizada en el edificio de la Facultad de Física, con el siguiente código:
 \begin{lstlisting}
@@ -409,9 +398,9 @@ std::vector<Pose> path() {
         //Primera parte
         for (int n=0; n <= MAX_PTS_TRAY; n++){
             position.position.x = min_x + (max_x - min_x)*n/(MAX_PTS_TRAY + 1);
-            position.position.y = min_y ;
-            
+            position.position.y = min_y ;            
             position.orientation = tf::createQuaternionMsgFromYaw(0); //0 grados
+           
             ruta.push_back(position);
         }
 
@@ -420,8 +409,8 @@ std::vector<Pose> path() {
         for (int n=0; n <= MAX_PTS_TRAY; n++){
             position.position.x = max_x ;
             position.position.y = min_y + (max_y - min_y)*n/(MAX_PTS_TRAY + 1);
-            
             position.orientation = tf::createQuaternionMsgFromYaw(0); //0 grados
+            
             ruta.push_back(position);
         }
 
@@ -429,8 +418,8 @@ std::vector<Pose> path() {
         for (int n=0; n <= MAX_PTS_TRAY; n++){
             position.position.x = max_x - (max_x - min_x)*n/(MAX_PTS_TRAY + 1);
             position.position.y = max_y ;
-            
             position.orientation = tf::createQuaternionMsgFromYaw(0); //0 grados
+            
             ruta.push_back(position);
         }
 
@@ -438,8 +427,8 @@ std::vector<Pose> path() {
         for (int n=0; n <= MAX_PTS_TRAY; n++){
             position.position.x = min_x ;
             position.position.y = max_y - (max_y - min_y)*n/(MAX_PTS_TRAY + 1);
-            
             position.orientation = tf::createQuaternionMsgFromYaw(0); //0 grados
+            
             ruta.push_back(position);
         }
 

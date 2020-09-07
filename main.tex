@@ -72,7 +72,8 @@
 \makeatother
 
 \setcounter{secnumdepth}{4}
-\setcounter{tocdepth}{4}
+\setcounter{tocdepth}{3}
+
 % SUBSUBSUBSECTION -------------------------------------------------------------------------------------------
 
 \DeclareMathOperator*{\argmax}{arg\,max}
@@ -132,6 +133,10 @@ Fdo. Carlos Javier García Orellana
 \section*{Abstract}
 
 \input{tex/abstract.tex}
+
+% Páginas impares.
+\let\oldsection\section% Store \section in \oldsection
+\renewcommand{\section}{\cleardoublepage\oldsection}% Prepend new \section with \cleardoublepage
 
 %------------------------------------------------------------------------------
 %                             Objetivos
@@ -205,11 +210,11 @@ Fdo. Carlos Javier García Orellana
 %------------------------------------------------------------------------------
 
 \newpage
-\section{Apéndice 1}
+\section*{Apéndice A}
 \input{tex/apendice_datos.tex}
 
 \newpage
-\section{Apéndice 2}
+\section*{Apéndice B}
 \input{tex/apendice_codigo.tex}
 
 \end{document}
