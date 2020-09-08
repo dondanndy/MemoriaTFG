@@ -378,7 +378,7 @@ El Ultra-Wide Band (UWB) se define como una emisión de radiofrecuencia con un a
 Su definición técnica se recoge en el estándar 802.15.4 del IEEE junto con otras redes inalámbricas de área personal.
 
 Los canales usados y las potencias permitidas tienen distintas legislaciones según el país que se trate.
-En el caso de Europa, la regulación del Instituto Europeo de Normas de Telecomunicaciones (ETSI) permite emisiones en los rangos de frecuencia $3.1 - 4.8\si{\giga\hertz}$, destinado a localización de servicios de emergencia y  $6.0 - 9.0\si{\giga\hertz}$ para localización general \cite{UWB_regs}.
+En el caso de Europa, la regulación del Instituto Europeo de Normas de Telecomunicaciones (ETSI) permite emisiones en los rangos de frecuencia $3.1 - 4.8~\si{\giga\hertz}$, destinado a localización de servicios de emergencia y  $6.0 - 9.0~\si{\giga\hertz}$ para localización general \cite{UWB_regs}.
 
 \subsubsection{Ventajas}
 
@@ -388,12 +388,35 @@ Aunque no es el único, ya que también permite la transmisión de datos de una 
 
 El espectro tan amplio de frecuencia provoca que el decaimiento de la señal, dependiente de la frecuencia, sea fácilmente identificable al estar formado de componentes que sufren este hecho de forma acusada.
 
+Además, un gran ancho de banda permite el uso de pulsos muy cortos en el tiempo, dando una gran resolución temporal.
+Teniendo en cuenta que la alta velocidad de transporte de ondas electromagnéticas, la posibilidad de acortar la duración de cada pulso es fundamental para conseguir una alta precisión en el tiempo.
+En la Figura~\ref{fig:forma_pulsos} se muestra una comparación cualitativa de este fenómeno.
+
+\begin{figure}[H]
+    \begin{subfigure}[b]{.5\textwidth}
+      \centering
+      \def\svgwidth{0.8\linewidth}
+      \input{fig/pulso_tiempo.pdf_tex} 
+      \caption{Tiempo}
+      \label{fig:forma_pulsos_tiempo}
+    \end{subfigure}
+    \begin{subfigure}[b]{.5\textwidth}
+      \centering
+      \def\svgwidth{0.8\linewidth}
+      \input{fig/pulso_frec.pdf_tex}
+      \caption{Frecuencia}
+      \label{fig:forma_pulsos_frec}
+    \end{subfigure}
+    \caption{Comparación cualitativa entre pulsos con menor ancho de banda, más duraderos en el tiempo (rojo) y con mayor ancho de banda y menor duración temporal (negro).}
+    \label{fig:forma_pulsos}
+  \end{figure}
+
 En el caso de que se produzca propagación multicamino, en la que los rebotes creen nuevos frentes de onda, la resolución del camino principal se vuelve sencilla teniendo en cuenta que el espacio adicional que recorran las trayectoria sin visión directa --fruto de la reflexión en paredes u obstáculos-- hacen que estos caminos secundarios se verá rápidamente desfavorecidos.
 
 Además, el amplio ancho de banda hace que las interferencias entre los propios pulsos fruto de los distintos caminos sean mínimas, nulas si el tiempo de propagación adicional supera el periodo entre la emisión de dos pulsos.
 
-Este último hecho es muy probable en el caso del UWB.
-El tiempo de transmisión de un pulso viene dado por\cite{MAIN}
+Este último hecho es muy probable en el caso del UWB, como se comentó anteriormente al emitir pulsos muy cortos en el tiempo.
+Además, el tiempo de transmisión de un pulso viene dado por\cite{MAIN}
 \begin{equation}
     T_{tx} = \left(N_d + \frac{N_d}{N_{mP}N_{0}N_d} \right) T_b T_{pr}
 \end{equation}
@@ -421,7 +444,6 @@ Un gran ancho de banda permite el uso de varias bandas del espectro electromagn�
 Aun así, es habitual el uso de técnicas de detección y evasión (DAA), en las que antes de la puesta en marcha de la transmisión se evalúan los canales en uso para evitar en la medida de lo posible las bandas ya ocupadas.
 
 \subsubsection{Pulsos de UWB}
-
 En el diseño de sistemas de UWB la elección de la forma del pulso es crucial, ya que determina la respuesta en frecuencias como se muestra en la Figura~\ref{fig:Pulsos}.
 Los pulsos mayoritariamente tienen perfiles gaussianos, aunque con distintas características \cite{Du}.
 
@@ -543,10 +565,10 @@ En la Figura~\ref{fig:robot} se puede ver el robot durante una de las tomas de m
 El TurtleBot funciona con ROS --\textit{Robot Operating System}, en inglés--, un entorno de trabajo enfocado a los sistemas robóticos encargado del soporte para todos los dispositivos hardware del robot como motores, encoders o cámaras. 
 Cuenta con diversas librerías para distintos casos de uso, entre las que se encuentra la navegación en un entorno controlado como la que se da en el caso de este trabajo.
 
-Su funcionamiento se basa en una arquitectura de grafos, donde se definen nodos en los que se realiza el procesamiento de sensores, control, actuadores o cualquier otra función.
+Su funcionamiento se basa en una arquitectura de grafos, donde se definen \textit{nodos}, tareas en las que se realiza el procesamiento de sensores, control, actuadores o cualquier otra función.
 Los nodos se comunican entre ellos con mensajes llamados \textit{topic}, y es posible su desarrollo con los lenguajes C++ y Python.
 
-Dentro de los paquetes disponibles, el usado en el desarrollo del trabajo es el encargado de la navegación del robot, que permite desplazar al robot a cualquier punto del entorno de trabajo.
+Dentro de los paquetes disponibles, el usado en el desarrollo del trabajo es el encargado de la navegación del robot, que permite desplazar al robot a cualquier punto del entorno de trabajo y proporcionar de forma constante su posición en el mapa.
 
 Es posible acoplar al robot un sistema de visión llamado Kinect que, mediante luz, permite obtener un mapa de profundidad del entorno que lo rodea.
 Fue desarrollado en primera instancia para el uso en videojuegos pero su uso también se ha extendido a labores de investigación al permitir el posicionamiento de objetos y paredes, de tal manera que permite al robot evitar obstáculos dinámicos en el caso de que interpongan en su camino.
@@ -555,11 +577,10 @@ La funcionalidad de navegación aprovecha estos sensores realizando una fusión 
 
 Para conseguir el posicionamiento en el mapa el paquete de navegación utiliza un \textit{planner} global sobre el que es posible determinar las rutas a seguir por el robot para llegar a un punto dado sorteando obstáculos y paredes.
 Junto a él trabaja un \textit{planner} local, en el que gracias a los sensores incorporados se evalúan de forma continua los alrededores del robot.
-Así, es posible conseguir de forma continua una evaluación de los posibles obstáculos que no se encuentran en el mapa del planner global, para lo que se construye un mapa de costes con el fin de abortar el movimiento en el caso de que sea imposible alcanzar el punto objetivo.
+Así, es posible conseguir de forma continua una evaluación de los posibles obstáculos que no se encuentran en el mapa del planner global, para lo que se construye un mapa de costes con el fin de abortar el movimiento en el caso de que sea imposible alcanzar el punto objetivo \cite{ROSDoc}.
 
-Con la información actualizada del \textit{planner} local, el \textit{planner} global es capaz de proporcionar la posición del robot en el mapa.
+Con la información actualizada del \textit{planner} local, el \textit{planner} global es capaz de modificar los trayectos para que el robot pueda continuar su desplazamiento por el mapa.
 Es posible observar un esquema del funcionamiento de estos sistemas en la Figura~\ref{fig:move_base}.
-% PREGUNTAR ESTO. Como va el amcl exactamente?
 
 \begin{figure}[H]
     \centering
@@ -576,6 +597,8 @@ Esto no solo ahorra tiempo, sino que además minimiza las posibles discrepancias
 
 La opción de realizar un mapa previo fue la elegida en este caso, ya que el robot cuenta con rutinas para el reposicionamiento en el mapa en dicho caso.
 Así, a partir de los límites establecidos y comprobados de forma manual, las posibles discrepancias en la odometría del robot se ven continuamente compensadas y corregidas.
+
+A partir de estos datos corregidos es posible conocer en cualquier momento la posición del robot en el mapa, expuesta a través de ROS en uno de los topic disponibles.
 
 Para facilitar el uso de ROS existe la posibilidad de usar el simulador Stage, capaz de crear un mundo virtual a partir de un mapa en dos dimensiones en el que colocar el Turtlebot y simular su funcionamiento de forma total sin tener acceso al robot de forma física.
 Es posible observar su interfaz en la Figura~\ref{fig:stage_rviz}.
@@ -614,7 +637,7 @@ Algunas alternativas comerciales cuentan con antenas direccionales que permiten 
 Los sensores, además de la comunicación por UWB, también permiten el uso de Bluetooth para su configuración como objetivos o balizas y en este último caso, para establecer la posición en la que se encuentran.
 También permite configurar estas posiciones de las balizas de forma automática, aunque requiere que todas se coloquen en el mismo plano y en general una configuración manual proporcionará unos mejores resultados.
 
-Para la comunicación por UWB los sensores utilizan el canal 5, con frecuencia central de $6,5$GHz y ancho de banda de $499.2$MHz que le permiten una tasa de datos de $6.81$Mbps \cite{Decawave}.
+Para la comunicación por UWB los sensores utilizan el canal 5, con frecuencia central de $6.5$ GHz y ancho de banda de $499.2$ MHz que le permiten una tasa de datos de $6.81$ Mbps \cite{Decawave}.
 
 El inicio de comercialización de dicho kit se remonta a 2017, por lo que no existe una amplia bibliografía sobre su uso en entornos reales más allá de los datos proporcionados por el fabricante.
 

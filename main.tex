@@ -94,15 +94,17 @@ Carlos Javier García Orellana, profesor del
 Departamento de Ingeniería Eléctrica, Electrónica y Automática de la Universidad de
 Extremadura.
 
+\vspace*{1cm}
 INFORMA:
 
+\vspace*{1cm}
 Que D. Daniel Alfonso Durán García ha realizado
 bajo su dirección el Trabajo Fin de Grado. Consideran que la memoria reúne
 los requisitos necesarios para su evaluación.
 
 \vspace*{1cm}
 \begin{center}
-Badajoz, día de mes de 2020
+Badajoz, 8 de septiembre de 2020
 
 
 \vspace{5cm}
@@ -115,6 +117,10 @@ Fdo. Carlos Javier García Orellana
 
 \tableofcontents
 
+\renewcommand{\thetable}{\thesection.\arabic{table}}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
 
 %------------------------------------------------------------------------------
 %                             Resumen
@@ -122,6 +128,7 @@ Fdo. Carlos Javier García Orellana
 
 \newpage
 \section*{Resumen}
+\addcontentsline{toc}{section}{Resumen}
 
 \input{tex/resumen.tex}
 
@@ -150,6 +157,9 @@ Fdo. Carlos Javier García Orellana
 %------------------------------------------------------------------------------
 %                             Introduccion
 %------------------------------------------------------------------------------
+\setcounter{table}{0}
+\setcounter{equation}{0}
+\setcounter{figure}{0}
 
 \newpage
 \section{Introducción y objetivos}
@@ -159,6 +169,9 @@ Fdo. Carlos Javier García Orellana
 %------------------------------------------------------------------------------
 %                             Antecedentes
 %------------------------------------------------------------------------------
+\setcounter{table}{0}
+\setcounter{equation}{0}
+\setcounter{figure}{0}
 
 \newpage
 \section{Antecedentes}
@@ -167,6 +180,9 @@ Fdo. Carlos Javier García Orellana
 %------------------------------------------------------------------------------
 %                             Metodologia
 %------------------------------------------------------------------------------
+\setcounter{table}{0}
+\setcounter{equation}{0}
+\setcounter{figure}{0}
 
 \newpage
 \section{Metodología}
@@ -176,6 +192,9 @@ Fdo. Carlos Javier García Orellana
 %------------------------------------------------------------------------------
 %                             Resultados
 %------------------------------------------------------------------------------
+\setcounter{table}{0}
+\setcounter{equation}{0}
+\setcounter{figure}{0}
 
 \newpage
 \section{Resultados}
@@ -208,13 +227,18 @@ Fdo. Carlos Javier García Orellana
 %------------------------------------------------------------------------------
 %                             Apéndices
 %------------------------------------------------------------------------------
+\setcounter{table}{0}
+\setcounter{equation}{0}
+\setcounter{figure}{0}
 
 \newpage
 \section*{Apéndice A}
+\addcontentsline{toc}{section}{Apéndice A}
 \input{tex/apendice_datos.tex}
 
 \newpage
 \section*{Apéndice B}
+\addcontentsline{toc}{section}{Apéndice B}
 \input{tex/apendice_codigo.tex}
 
 \end{document}

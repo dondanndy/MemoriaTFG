@@ -53,11 +53,11 @@ En todos los casos se obtuvo una distribución de tipo gaussiano, como se puede 
 \end{figure}
 
 Además, para eliminar cualquier tipo de anomalía estadística cada trayectoria se repitió un mínimo de tres veces, tras las que se evaluaron los datos.
-En los casos en los que la dispersión fue excesiva, se procedió a repetir de nuevo estas mediciones.
-% PREGUNTAR ESTO. Quitar lo de las repeticiones?
 
-En las primeras tomas, donde se orientaba el robot hacia el siguiente punto de tal forma que su desplazamiento tomase el menor tiempo posible, se observó que el diseño de las antenas de los sensores utilizados, con una ganancia ligeramente dependiente del ángulo de incidencia \cite{ang}, hacía que, al girar el sensor asignado como objetivo, la estimación de su posición variase.
-% PREGUNTAR ESTO. QUe poner con lo de la ganancia al final.
+En las primeras tomas de medidas se pudo observar que la orientación del sensor utilizado como objetivo hacía que los valores de posición proporcionados variasen.
+El fabricante indica que las antenas de los sensores tienen una ganancia ligeramente dependiente del ángulo de incidencia de la señal \cite{ang}, lo que podría explicar estas variaciones.
+
+% En las primeras tomas, donde se orientaba el robot hacia el siguiente punto de tal forma que su desplazamiento tomase el menor tiempo posible, se observó que el diseño de las antenas de los sensores utilizados, con una ganancia ligeramente dependiente del ángulo de incidencia \cite{ang}, podría provocar que, al girar el sensor asignado como objetivo, la estimación de su posición variase.
 
 Esta observación también ha sido recogida en trabajos previos \cite{MSTesis}, donde se intentaba corregir a partir de medidas con distintos ángulos de incidencia.
 Esto no es posible en el caso de este trabajo, ya que no versa sobre el desarrollo de un algoritmo de posicionamiento, sino sobre el estudio la precisión del ya implementado.

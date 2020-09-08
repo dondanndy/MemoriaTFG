@@ -3,7 +3,7 @@ Tal y como viene recogido en las sección anterior, en la toma de medidas se rec
 Para el análisis de los resultados se han considerado a los datos obtenidos por el posicionamiento local del robot como \textit{ground truth}, es decir, como la posición verdadera del sensor establecido como objetivo, que está colocado encima del robot.
 A partir de esta consideración, es posible definir el error en la posición para cada uno de los ejes cartesianos como
 \begin{equation}\label{eq:Diff_eje}
-    \text{Error eje} = \text{Valor robot} - \text{Valor sensores}
+    \text{Error eje} = \text{Valor posición robot} - \text{Valor posición sensores}
 \end{equation}
 
 El kit utilizado permite el posicionamiento en tres dimensiones, aunque no se presentarán y estudiarán los resultados en el eje vertical, ya que el sensor a posicionar se encontraba en todo momento encima del robot, a la misma altura.
@@ -30,10 +30,10 @@ En el caso del robot los sistemas de posicionamiento local propios, basados en l
 % PREGUNTAR ESTO. Como poner cada eje?
 % Sin embargo, dependen también de la presencia de paredes u objetos contra los que comparar los datos de odometría que proporcionan los motores lo mueven.
 
-La adición de ambas fuentes de error, siguiendo el teorema del límite central, nos dará una distribución que tenderá con un número creciente de medias hacia otra distribución gaussiana con el error total en la posición del robot.
+La adición de ambas fuentes de error --robot y sensores--, siguiendo el teorema del límite central, nos dará una distribución que tenderá con un número creciente de medias hacia otra distribución gaussiana con el error total en la posición.
 Teniendo en cuenta que los errores de posicionamiento no son absolutos, será posible encontrar casos puntuales en los que la adición de ambas fuentes de error proporcione un error total con un valor menor que cada uno de los errores por separado, compensándose entre sí.
 
-La toma de numerosas medidas con distintas rutas trata de minimizar este hecho, de tal forma que, de media, es razonable esperar un error en el posicionamiento en torno a los 20cm, en el caso de \eqref{eq:vec_pos}.
+La toma de numerosas medidas con distintas rutas trata de minimizar este hecho, de tal forma que, de media, es razonable esperar un error en el posicionamiento en torno a los 20~cm, en el caso de \eqref{eq:vec_pos}.
 
 \subsection{Laboratorio de Robótica del ICCAEx}
 
@@ -59,9 +59,10 @@ Para tratar de comprobar el comportamiento general de la combinación de sensore
     \hspace*{-0.5cm}
     \input{graph/res/4sensores.pgf}
     \captionsetup{justification=justified}
-    \caption{Resultados de las medidas en el laboratorio con 4 balizas.\newline En esta representación y en todas las sucesivas figuran los valores de error obtenidos en los puntos del laboratorio donde se tomaron las medidas. A partir de ellos se ha realizado una interpolación con splines bicúbicos para obtener la distribución continua que se ha representado. Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
+    \caption{Resultados de las medidas en el laboratorio con 4 balizas.\protect\footnotemark \, Entre paréntesis se indica la desviación estándar de los errores obtenidos en cada punto.}
     \label{fig:res_lab}
 \end{figure}
+\footnotetext{En esta representación y en todas las sucesivas figuran los valores de error obtenidos en los puntos del laboratorio donde se tomaron las medidas. A partir de ellos se ha realizado una interpolación con splines bicúbicos para obtener la distribución continua que se ha representado.}
 
 % Como se comentaba al inicio de la sección, la dificultad a la hora de evaluar la discrepancia en el posicionamiento que conlleva el uso del robot hace que sea difícil evaluar el rendimiento de los sensores a partir de los resultados de posicionamiento, aunque sí es posible hacerlo teniendo en cuenta la desviación en la toma de medidas de cada punto.
 
